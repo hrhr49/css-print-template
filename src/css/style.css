@@ -56,26 +56,13 @@ h1, h2, h3, h4, h5, h6 {
   @page :first {
     /* タイトルページなので上にパディングを多めに取る */
     padding-top: 25%;
-    /* ページ下中央の余白部分 */
+    /* ヘッダ・フッタはなし */
     @bottom-center {
-      content: '';
-      background-color: white;
-      margin-bottom: -3mm;
-      /* 隙間が開くので左右にも広げる */
-      margin-left: -1q;
-      margin-right: -1q; }
-    /* ページ右下の余白部分 */
+      content: none; }
     @bottom-right-corner {
-      content: '';
-      background-color: white;
-      margin-bottom: -3mm;
-      margin-right: -3mm; }
-    /* ページ左下の余白部分 */
+      content: none; }
     @bottom-left-corner {
-      content: '';
-      background-color: white;
-      margin-bottom: -3mm;
-      margin-left: -3mm; } }
+      content: none; } }
   body {
     /* 明示されていない限り単語の途中は分断しない */
     word-break: keep-all;
@@ -89,7 +76,9 @@ h1, h2, h3, h4, h5, h6 {
     counter-reset: h1 h2 h3; }
   h1 {
     counter-increment: h1;
-    counter-reset: h2 h3; }
+    counter-reset: h2 h3;
+    /* 点々の下線を加える */
+    border-bottom: dotted; }
     h1::before {
       /* 章番号を先頭につける */
       content: counter(h1) " "; }
@@ -141,11 +130,19 @@ h1, h2, h3, h4, h5, h6 {
   /* タイトル */
   .title {
     font-size: 5rem;
+    font-weight: bold;
     color: midnightblue; }
-  /* １ページ目 */
-  .first-page {
+  /* 表紙 */
+  header {
     text-align: center;
     break-after: page; }
+    header h1 {
+      /* 章番号をつけない */
+      /* カウンタを増やさない */
+      counter-increment: h1 0;
+      font-size: 4rem; }
+      header h1::before {
+        content: none; }
   /* 脚注の設定 */
   span.footnote {
     /* 脚注を表示 */
@@ -156,7 +153,24 @@ h1, h2, h3, h4, h5, h6 {
     /* footnote-markerは脚注の先頭に挿入される */ }
     span.footnote::footnote-call, span.footnote::footnote-marker {
       content: "[" counter(footnote) "] "; }
-  /* 目次 */
-  nav.toc a::after {
-    content: target-counter(attr(href), page);
-    float: right; } }
+  /* 目次 (参考： https://gist.github.com/MurakamiShinyu/4f0423fd3578a277c7d29f56a31912b7/) */
+  nav.toc {
+    break-before: page; }
+    nav.toc li a {
+      display: inline-flex;
+      width: 100%;
+      align-items: baseline;
+      text-decoration: none;
+      color: midnightblue; }
+      nav.toc li a::before {
+        margin-left: 0.5em;
+        margin-right: 0.5em;
+        border-bottom: 1px dotted;
+        content: "";
+        order: 1;
+        flex: auto; }
+      nav.toc li a::after {
+        content: target-counter(attr(href), page);
+        align-self: flex-end;
+        flex: none;
+        order: 2; } }
