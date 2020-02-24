@@ -3,9 +3,115 @@ table, th, td {
     border-collapse: collapse;
 }
 
+p {
+    border: 2px solid green;
+}
+
+/* ここに画面に表示されるときの設定を書く */
+@media screen {
+}
+
 /* ここに印刷時の設定を書く */
 @media print{
     @page {
+        /* 印刷サイズA4 */
         size: A4;
+        /* margin: 20mm; */
+        margin: 1cm;
+
+        /* ページ下中央の余白部分 */
+        @bottom-center {
+            content: '';
+            background-color: royalblue;
+            margin-bottom: -3mm;
+            /* 隙間が開くので左右にも広げる */
+            margin-left: -1q;
+            margin-right: -1q;
+        }
+
+        /* ページ右下の余白部分 */
+        @bottom-right-corner {
+            content: '';
+            background-color: royalblue;
+            margin-bottom: -3mm;
+            margin-right: -3mm;
+        }
+
+        /* ページ左下の余白部分 */
+        @bottom-left-corner {
+            content: '';
+            background-color: royalblue;
+            margin-bottom: -3mm;
+            margin-left: -3mm;
+        }
+
+        /* cropで四隅に、crossで四辺にトンボを表示 */
+        marks: crop cross;
+
+
+        /* 「塗り足し」設定。bleedでページ範囲外の領域（裁ち落とし）の大きさ設定 */
+        /* ページマージンボックスを塗り足し部分に含めるために                    */
+        /* ページマージンボックスにマイナスマージンを指定する必要あり            */
+        bleed: 3mm;
+    }
+
+    /* 見開きの左ページにのみ適用 */
+    @page :left {
+        margin-left: 30mm;
+    }
+
+    /* 見開きの右ページにのみ適用 */
+    @page :right {
+        margin-right: 30mm;
+    }
+
+    /* 最初のページにのみ適用 */
+    @page: first {
+        /* タイトルページなので上にパディングを多めに取る */
+        padding-top: 50mm;
+    }
+
+    body {
+        /* 明示されていない限り単語の途中は分断しない */
+        word-break: keep-all;
+
+        /* 々、・、！、ー、〜などの前で改行しない */
+        line-break: strict;
+
+        /* 文章が領域からはみ出す際は例外的に改行を許可 */
+        overflow-wrap: break-word;
+
+        /* 英字の単語の途中で分割できるか */
+        hyphens: auto;
+
+    }
+
+    section {
+        break-before: page;
+        break-after: page;
+
+        /* 以下のようにしても同じ */
+        /* page-break-before: always; */
+        /* page-break-after: always; */
+    }
+
+    p {
+        /* pタグ内で改ページされないようにする。 */
+        /* break-inside: avoid-page; */
+
+        /* 以下のようにしても同じ */
+        /* page-break-inside: avoid; */
+
+        /* 改ページ前に３行未満が残らないように分割 */
+        orphans: 3;
+
+        /* 改ページ後に３行未満が残らないように分割 */
+        widows: 3;
+
+        /* 改ページが途中で入ったときにそこの境界線にもスタイルを適用 */
+        box-decoration-break: clone;
+
+        /* 段落の始まりでインデント */
+        text-indent: 1rem;
     }
 }
