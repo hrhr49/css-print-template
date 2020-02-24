@@ -1,0 +1,11 @@
+table, th, td {
+    border: 1px solid blue;
+    border-collapse: collapse;
+}
+
+/* ここに印刷時の設定を書く */
+@media print{
+    @page {
+        size: A4;
+    }
+}
