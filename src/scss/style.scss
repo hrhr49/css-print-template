@@ -1,14 +1,19 @@
+/* 見出しやヘッダ・フッタに使用する色 */
+$MAIN_COLOR: midnightblue;
+/* MAIN_COLORを背景としたときのフォントの色 */
+$MAIN_FONT_COLOR: white;
+
 table, th, td {
-    border: 1px solid royalblue;
+    border: 1px solid $MAIN_COLOR;
     border-collapse: collapse;
 }
 
 p {
-    border: 2px solid royalblue;
+    border: 2px solid $MAIN_COLOR;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: royalblue;
+    color: $MAIN_COLOR;
 }
 
 /* ここに画面に表示されるときの設定を書く */
@@ -25,8 +30,11 @@ h1, h2, h3, h4, h5, h6 {
 
         /* ページ下中央の余白部分 */
         @bottom-center {
-            content: '';
-            background-color: royalblue;
+            /* 表示するテキスト */
+            content: '@Copyright AAA';
+            color: $MAIN_FONT_COLOR;
+            background-color: $MAIN_COLOR;
+            font-size: 5mm;
             margin-bottom: -3mm;
             /* 隙間が開くので左右にも広げる */
             margin-left: -1q;
@@ -35,8 +43,11 @@ h1, h2, h3, h4, h5, h6 {
 
         /* ページ右下の余白部分 */
         @bottom-right-corner {
-            content: '';
-            background-color: royalblue;
+            /* ページ番号を表示 */
+            content: counter(page) ' / ' counter(pages);
+            color: $MAIN_FONT_COLOR;
+            font-size: 5mm;
+            background-color: $MAIN_COLOR;
             margin-bottom: -3mm;
             margin-right: -3mm;
         }
@@ -44,13 +55,13 @@ h1, h2, h3, h4, h5, h6 {
         /* ページ左下の余白部分 */
         @bottom-left-corner {
             content: '';
-            background-color: royalblue;
+            background-color: $MAIN_COLOR;
             margin-bottom: -3mm;
             margin-left: -3mm;
         }
 
         /* cropで四隅に、crossで四辺にトンボを表示 */
-        marks: crop cross;
+        // marks: crop cross;
 
 
         /* 「塗り足し」設定。bleedでページ範囲外の領域（裁ち落とし）の大きさ設定 */
@@ -60,19 +71,44 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     /* 見開きの左ページにのみ適用 */
-    @page :left {
-        margin-left: 30mm;
-    }
+    // @page :left {
+    //     margin-left: 30mm;
+    // }
 
     /* 見開きの右ページにのみ適用 */
-    @page :right {
-        margin-right: 30mm;
-    }
+    // @page :right {
+    //     margin-right: 30mm;
+    // }
 
     /* 最初のページにのみ適用 */
-    @page: first {
+    @page :first {
         /* タイトルページなので上にパディングを多めに取る */
-        padding-top: 50mm;
+        padding-top: 25%;
+        /* ページ下中央の余白部分 */
+        @bottom-center {
+            content: '';
+            background-color: white;
+            margin-bottom: -3mm;
+            /* 隙間が開くので左右にも広げる */
+            margin-left: -1q;
+            margin-right: -1q;
+        }
+
+        /* ページ右下の余白部分 */
+        @bottom-right-corner {
+            content: '';
+            background-color: white;
+            margin-bottom: -3mm;
+            margin-right: -3mm;
+        }
+
+        /* ページ左下の余白部分 */
+        @bottom-left-corner {
+            content: '';
+            background-color: white;
+            margin-bottom: -3mm;
+            margin-left: -3mm;
+        }
     }
 
     body {
@@ -88,6 +124,33 @@ h1, h2, h3, h4, h5, h6 {
         /* 英字の単語の途中で分割できるか */
         hyphens: auto;
 
+        /* 章、節番号のリセット */
+        counter-reset: h1 h2 h3;
+    }
+
+    h1 {
+        counter-increment: h1;
+        counter-reset: h2 h3;
+        &::before {
+            /* 章番号を先頭につける */
+            content: counter(h1) ' ';
+        }
+    }
+
+    h2 {
+        counter-increment: h2;
+        counter-reset: h3;
+        &::before {
+            /* 節番号を先頭につける */
+            content: counter(h1) '.' counter(h2) ' ';
+        }
+    }
+
+    h3 {
+        counter-increment: h3;
+        &::before {
+            content: counter(h1) '.' counter(h2) '.' counter(h3) ' ';
+        }
     }
 
     section {
@@ -118,4 +181,75 @@ h1, h2, h3, h4, h5, h6 {
         /* 段落の始まりでインデント */
         text-indent: 1rem;
     }
+
+    figcaption {
+        // 前後の文章に応じて図表の位置を調節する
+        // float-reference: page;
+        // float: bottom;
+
+        /* 図表カウンタを増やす */
+        counter-increment: fig;
+
+        /* 図表番号を挿入 */
+        &::before {
+            content: '図' counter(fig) '. ';
+        }
+
+        &:first-child {
+            padding-bottom: 1rem;
+        }
+
+        &:last-child {
+            padding-top: 1rem;
+        }
+    }
+
+    figure {
+        // 前後の文章に応じて図表の位置を調節する
+        // float-reference: page;
+        // float: snap-block;
+        margin: 0;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* タイトル */
+    .title {
+        font-size: 5rem;
+        color: $MAIN_COLOR;
+    }
+
+    /* １ページ目 */
+    .first-page {
+        text-align: center;
+        break-after: page;
+    }
+
+    /* 脚注の設定 */
+    span {
+        &.footnote {
+            /* 脚注を表示 */
+            float: footnote;
+
+            /* 脚注のカウントを増やす */
+            counter-increment: footnote;
+
+            /* footnote-callは脚注を呼び出している箇所 */
+            /* footnote-markerは脚注の先頭に挿入される */
+            &::footnote-call,
+            &::footnote-marker {
+                content: '[' counter(footnote) '] ';
+            }
+        }
+    }
+
+    /* 目次 */
+    nav.toc a::after {
+        content: target-counter(attr(href), page);
+        float: right;
+    }
+
 }
+

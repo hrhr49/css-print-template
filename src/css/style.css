@@ -1,13 +1,15 @@
 @charset "UTF-8";
+/* 見出しやヘッダ・フッタに使用する色 */
+/* MAIN_COLORを背景としたときのフォントの色 */
 table, th, td {
-  border: 1px solid royalblue;
+  border: 1px solid midnightblue;
   border-collapse: collapse; }
 
 p {
-  border: 2px solid royalblue; }
+  border: 2px solid midnightblue; }
 
 h1, h2, h3, h4, h5, h6 {
-  color: royalblue; }
+  color: midnightblue; }
 
 /* ここに画面に表示されるときの設定を書く */
 /* ここに印刷時の設定を書く */
@@ -19,8 +21,45 @@ h1, h2, h3, h4, h5, h6 {
     margin: 1cm;
     /* ページ下中央の余白部分 */
     @bottom-center {
+      /* 表示するテキスト */
+      content: '@Copyright AAA';
+      color: white;
+      background-color: midnightblue;
+      font-size: 5mm;
+      margin-bottom: -3mm;
+      /* 隙間が開くので左右にも広げる */
+      margin-left: -1q;
+      margin-right: -1q; }
+    /* ページ右下の余白部分 */
+    @bottom-right-corner {
+      /* ページ番号を表示 */
+      content: counter(page) " / " counter(pages);
+      color: white;
+      font-size: 5mm;
+      background-color: midnightblue;
+      margin-bottom: -3mm;
+      margin-right: -3mm; }
+    /* ページ左下の余白部分 */
+    @bottom-left-corner {
       content: '';
-      background-color: royalblue;
+      background-color: midnightblue;
+      margin-bottom: -3mm;
+      margin-left: -3mm; }
+    /* cropで四隅に、crossで四辺にトンボを表示 */
+    /* 「塗り足し」設定。bleedでページ範囲外の領域（裁ち落とし）の大きさ設定 */
+    /* ページマージンボックスを塗り足し部分に含めるために                    */
+    /* ページマージンボックスにマイナスマージンを指定する必要あり            */
+    bleed: 3mm; }
+  /* 見開きの左ページにのみ適用 */
+  /* 見開きの右ページにのみ適用 */
+  /* 最初のページにのみ適用 */
+  @page :first {
+    /* タイトルページなので上にパディングを多めに取る */
+    padding-top: 25%;
+    /* ページ下中央の余白部分 */
+    @bottom-center {
+      content: '';
+      background-color: white;
       margin-bottom: -3mm;
       /* 隙間が開くので左右にも広げる */
       margin-left: -1q;
@@ -28,31 +67,15 @@ h1, h2, h3, h4, h5, h6 {
     /* ページ右下の余白部分 */
     @bottom-right-corner {
       content: '';
-      background-color: royalblue;
+      background-color: white;
       margin-bottom: -3mm;
       margin-right: -3mm; }
     /* ページ左下の余白部分 */
     @bottom-left-corner {
       content: '';
-      background-color: royalblue;
+      background-color: white;
       margin-bottom: -3mm;
-      margin-left: -3mm; }
-    /* cropで四隅に、crossで四辺にトンボを表示 */
-    marks: crop cross;
-    /* 「塗り足し」設定。bleedでページ範囲外の領域（裁ち落とし）の大きさ設定 */
-    /* ページマージンボックスを塗り足し部分に含めるために                    */
-    /* ページマージンボックスにマイナスマージンを指定する必要あり            */
-    bleed: 3mm; }
-  /* 見開きの左ページにのみ適用 */
-  @page :left {
-    margin-left: 30mm; }
-  /* 見開きの右ページにのみ適用 */
-  @page :right {
-    margin-right: 30mm; }
-  /* 最初のページにのみ適用 */
-  @page : first {
-    /* タイトルページなので上にパディングを多めに取る */
-    padding-top: 50mm; }
+      margin-left: -3mm; } }
   body {
     /* 明示されていない限り単語の途中は分断しない */
     word-break: keep-all;
@@ -61,7 +84,25 @@ h1, h2, h3, h4, h5, h6 {
     /* 文章が領域からはみ出す際は例外的に改行を許可 */
     overflow-wrap: break-word;
     /* 英字の単語の途中で分割できるか */
-    hyphens: auto; }
+    hyphens: auto;
+    /* 章、節番号のリセット */
+    counter-reset: h1 h2 h3; }
+  h1 {
+    counter-increment: h1;
+    counter-reset: h2 h3; }
+    h1::before {
+      /* 章番号を先頭につける */
+      content: counter(h1) " "; }
+  h2 {
+    counter-increment: h2;
+    counter-reset: h3; }
+    h2::before {
+      /* 節番号を先頭につける */
+      content: counter(h1) "." counter(h2) " "; }
+  h3 {
+    counter-increment: h3; }
+    h3::before {
+      content: counter(h1) "." counter(h2) "." counter(h3) " "; }
   section {
     break-before: page;
     break-after: page;
@@ -80,4 +121,42 @@ h1, h2, h3, h4, h5, h6 {
     /* 改ページが途中で入ったときにそこの境界線にもスタイルを適用 */
     box-decoration-break: clone;
     /* 段落の始まりでインデント */
-    text-indent: 1rem; } }
+    text-indent: 1rem; }
+  figcaption {
+    /* 図表カウンタを増やす */
+    counter-increment: fig;
+    /* 図表番号を挿入 */ }
+    figcaption::before {
+      content: "図" counter(fig) ". "; }
+    figcaption:first-child {
+      padding-bottom: 1rem; }
+    figcaption:last-child {
+      padding-top: 1rem; }
+  figure {
+    margin: 0;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+  /* タイトル */
+  .title {
+    font-size: 5rem;
+    color: midnightblue; }
+  /* １ページ目 */
+  .first-page {
+    text-align: center;
+    break-after: page; }
+  /* 脚注の設定 */
+  span.footnote {
+    /* 脚注を表示 */
+    float: footnote;
+    /* 脚注のカウントを増やす */
+    counter-increment: footnote;
+    /* footnote-callは脚注を呼び出している箇所 */
+    /* footnote-markerは脚注の先頭に挿入される */ }
+    span.footnote::footnote-call, span.footnote::footnote-marker {
+      content: "[" counter(footnote) "] "; }
+  /* 目次 */
+  nav.toc a::after {
+    content: target-counter(attr(href), page);
+    float: right; } }

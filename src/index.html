@@ -8,7 +8,34 @@
   <title></title>
 </head>
 <body>
-  <h1>大項目1</h1>
+  <!-- タイトルページ -->
+  <div class="first-page">
+    <div class="title">タイトル</div>
+    所属：XXX YYY<br />
+    著者名：山田　太郎<br />
+  </div>
+
+  <!-- 目次 -->
+  <nav class="toc">
+    <ol>
+      <li><a href="#chapter-dog">犬について</a></li>
+      <li><a href="#chapter-cat">猫について</a></li>
+    </ol>
+  </nav>
+
+  <!-- 目次参照先 -->
+  <section id="chapter-dog">
+    <h1>
+      犬について
+    </h1>
+  </section>
+  <section id="chapter-cat">
+    <h1>
+      猫について
+    </h1>
+  </section>
+
+  <h1>大項目</h1>
 
   ここに内容を書きます。
 
@@ -19,9 +46,14 @@
   <h3>h3タグの見出し</h3>
   <h2>h2タグの見出し</h2>
   
+  脚注をつけます。円周率は３
+  <span class="footnote">3.141592</span>
+  ネイピア数は
+  <span class="footnote">2.71828</span>
   これはテーブルです。
 
   <table>
+    <figcaption>テーブルの注釈</figcaption>
     <tr>
       <th>列名</th>
       <th>列名</th>
@@ -41,7 +73,10 @@
 
   これは画像です。
 
-  <img src="./images/gazo.png" alt="ここに画像があります。">
+  <figure>
+    <img src="./images/gazo.png" alt="ここに画像があります。">
+    <figcaption>ここに図の注釈が来ます</figcaption>
+  </figure>
 
   <p>長い文章です。 <br />
     長い文章です。  <br />
