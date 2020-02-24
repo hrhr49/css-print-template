@@ -4,16 +4,16 @@ $MAIN_COLOR: midnightblue;
 $MAIN_FONT_COLOR: white;
 
 table, th, td {
-    border: 1px solid $MAIN_COLOR;
-    border-collapse: collapse;
+  border: 1px solid $MAIN_COLOR;
+  border-collapse: collapse;
 }
 
 p {
-    border: 2px solid $MAIN_COLOR;
+  border: 2px solid $MAIN_COLOR;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: $MAIN_COLOR;
+  color: $MAIN_COLOR;
 }
 
 /* ここに画面に表示されるときの設定を書く */
@@ -22,234 +22,239 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ここに印刷時の設定を書く */
 @media print{
-    @page {
-        /* 印刷サイズA4 */
-        size: A4;
-        /* margin: 20mm; */
-        margin: 1cm;
+  @page {
+    /* 印刷サイズA4 */
+    size: A4;
+    /* margin: 20mm; */
+    margin: 1cm;
 
-        /* ページ下中央の余白部分 */
-        @bottom-center {
-            /* 表示するテキスト */
-            content: '@Copyright AAA';
-            color: $MAIN_FONT_COLOR;
-            background-color: $MAIN_COLOR;
-            font-size: 5mm;
-            margin-bottom: -3mm;
-            /* 隙間が開くので左右にも広げる */
-            margin-left: -1q;
-            margin-right: -1q;
-        }
-
-        /* ページ右下の余白部分 */
-        @bottom-right-corner {
-            /* ページ番号を表示 */
-            content: counter(page) ' / ' counter(pages);
-            color: $MAIN_FONT_COLOR;
-            font-size: 5mm;
-            background-color: $MAIN_COLOR;
-            margin-bottom: -3mm;
-            margin-right: -3mm;
-        }
-
-        /* ページ左下の余白部分 */
-        @bottom-left-corner {
-            content: '';
-            background-color: $MAIN_COLOR;
-            margin-bottom: -3mm;
-            margin-left: -3mm;
-        }
-
-        /* cropで四隅に、crossで四辺にトンボを表示 */
-        // marks: crop cross;
-
-
-        /* 「塗り足し」設定。bleedでページ範囲外の領域（裁ち落とし）の大きさ設定 */
-        /* ページマージンボックスを塗り足し部分に含めるために                    */
-        /* ページマージンボックスにマイナスマージンを指定する必要あり            */
-        bleed: 3mm;
+    /* ページ下中央の余白部分 */
+    @bottom-center {
+      /* 表示するテキスト */
+      content: '@Copyright AAA';
+      color: $MAIN_FONT_COLOR;
+      background-color: $MAIN_COLOR;
+      font-size: 5mm;
+      margin-bottom: -3mm;
+      /* 隙間が開くので左右にも広げる */
+      margin-left: -1q;
+      margin-right: -1q;
     }
 
-    /* 見開きの左ページにのみ適用 */
-    // @page :left {
+    /* ページ右下の余白部分 */
+    @bottom-right-corner {
+      /* ページ番号を表示 */
+      content: counter(page) ' / ' counter(pages);
+      color: $MAIN_FONT_COLOR;
+      font-size: 5mm;
+      background-color: $MAIN_COLOR;
+      margin-bottom: -3mm;
+      margin-right: -3mm;
+    }
+
+    /* ページ左下の余白部分 */
+    @bottom-left-corner {
+      content: '';
+      background-color: $MAIN_COLOR;
+      margin-bottom: -3mm;
+      margin-left: -3mm;
+    }
+
+    /* cropで四隅に、crossで四辺にトンボを表示 */
+    // marks: crop cross;
+
+
+    /* 「塗り足し」設定。bleedでページ範囲外の領域（裁ち落とし）の大きさ設定 */
+    /* ページマージンボックスを塗り足し部分に含めるために                    */
+    /* ページマージンボックスにマイナスマージンを指定する必要あり            */
+    bleed: 3mm;
+  }
+
+  /* 見開きの左ページにのみ適用 */
+  // @page :left {
     //     margin-left: 30mm;
-    // }
+  // }
 
-    /* 見開きの右ページにのみ適用 */
-    // @page :right {
+  /* 見開きの右ページにのみ適用 */
+  // @page :right {
     //     margin-right: 30mm;
-    // }
+  // }
 
-    /* 最初のページにのみ適用 */
-    @page :first {
-        /* タイトルページなので上にパディングを多めに取る */
-        padding-top: 25%;
-        /* ページ下中央の余白部分 */
-        @bottom-center {
-            content: '';
-            background-color: white;
-            margin-bottom: -3mm;
-            /* 隙間が開くので左右にも広げる */
-            margin-left: -1q;
-            margin-right: -1q;
-        }
-
-        /* ページ右下の余白部分 */
-        @bottom-right-corner {
-            content: '';
-            background-color: white;
-            margin-bottom: -3mm;
-            margin-right: -3mm;
-        }
-
-        /* ページ左下の余白部分 */
-        @bottom-left-corner {
-            content: '';
-            background-color: white;
-            margin-bottom: -3mm;
-            margin-left: -3mm;
-        }
+  /* 最初のページにのみ適用 */
+  @page :first {
+    /* タイトルページなので上にパディングを多めに取る */
+    padding-top: 25%;
+    /* ページ下中央の余白部分 */
+    @bottom-center {
+      content: '';
+      background-color: white;
+      margin-bottom: -3mm;
+      /* 隙間が開くので左右にも広げる */
+      margin-left: -1q;
+      margin-right: -1q;
     }
 
-    body {
-        /* 明示されていない限り単語の途中は分断しない */
-        word-break: keep-all;
-
-        /* 々、・、！、ー、〜などの前で改行しない */
-        line-break: strict;
-
-        /* 文章が領域からはみ出す際は例外的に改行を許可 */
-        overflow-wrap: break-word;
-
-        /* 英字の単語の途中で分割できるか */
-        hyphens: auto;
-
-        /* 章、節番号のリセット */
-        counter-reset: h1 h2 h3;
+    /* ページ右下の余白部分 */
+    @bottom-right-corner {
+      content: '';
+      background-color: white;
+      margin-bottom: -3mm;
+      margin-right: -3mm;
     }
 
-    h1 {
-        counter-increment: h1;
-        counter-reset: h2 h3;
-        &::before {
-            /* 章番号を先頭につける */
-            content: counter(h1) ' ';
-        }
+    /* ページ左下の余白部分 */
+    @bottom-left-corner {
+      content: '';
+      background-color: white;
+      margin-bottom: -3mm;
+      margin-left: -3mm;
+    }
+  }
+
+  body {
+    /* 明示されていない限り単語の途中は分断しない */
+    word-break: keep-all;
+
+    /* 々、・、！、ー、〜などの前で改行しない */
+    line-break: strict;
+
+    /* 文章が領域からはみ出す際は例外的に改行を許可 */
+    overflow-wrap: break-word;
+
+    /* 英字の単語の途中で分割できるか */
+    hyphens: auto;
+
+    /* 章、節番号のリセット */
+    counter-reset: h1 h2 h3;
+  }
+
+  h1 {
+    counter-increment: h1;
+    counter-reset: h2 h3;
+    &::before {
+      /* 章番号を先頭につける */
+      content: counter(h1) ' ';
+    }
+  }
+
+  h2 {
+    counter-increment: h2;
+    counter-reset: h3;
+    &::before {
+      /* 節番号を先頭につける */
+      content: counter(h1) '.' counter(h2) ' ';
+    }
+  }
+
+  h3 {
+    counter-increment: h3;
+    &::before {
+      content: counter(h1) '.' counter(h2) '.' counter(h3) ' ';
+    }
+  }
+
+  section {
+    break-before: page;
+    break-after: page;
+
+    /* 以下のようにしても同じ */
+    /* page-break-before: always; */
+    /* page-break-after: always; */
+  }
+
+  p {
+    /* pタグ内で改ページされないようにする。 */
+    /* break-inside: avoid-page; */
+
+    /* 以下のようにしても同じ */
+    /* page-break-inside: avoid; */
+
+    /* 改ページ前に３行未満が残らないように分割 */
+    orphans: 3;
+
+    /* 改ページ後に３行未満が残らないように分割 */
+    widows: 3;
+
+    /* 改ページが途中で入ったときにそこの境界線にもスタイルを適用 */
+    box-decoration-break: clone;
+
+    /* 段落の始まりでインデント */
+    text-indent: 1rem;
+  }
+
+  figcaption {
+    // 前後の文章に応じて図表の位置を調節する
+    // float-reference: page;
+    // float: bottom;
+
+    /* 図表カウンタを増やす */
+    counter-increment: fig;
+
+    /* 図表番号を挿入 */
+    &::before {
+      content: '図' counter(fig) '. ';
     }
 
-    h2 {
-        counter-increment: h2;
-        counter-reset: h3;
-        &::before {
-            /* 節番号を先頭につける */
-            content: counter(h1) '.' counter(h2) ' ';
-        }
+    &:first-child {
+      padding-bottom: 1rem;
     }
 
-    h3 {
-        counter-increment: h3;
-        &::before {
-            content: counter(h1) '.' counter(h2) '.' counter(h3) ' ';
-        }
+    &:last-child {
+      padding-top: 1rem;
     }
+  }
 
-    section {
-        break-before: page;
-        break-after: page;
+  figure {
+    // 前後の文章に応じて図表の位置を調節する
+    // float-reference: page;
+    // float: snap-block;
+    margin: 0;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-        /* 以下のようにしても同じ */
-        /* page-break-before: always; */
-        /* page-break-after: always; */
+  /* タイトル */
+  .title {
+    font-size: 5rem;
+    color: $MAIN_COLOR;
+  }
+
+  /* １ページ目 */
+  .first-page {
+    text-align: center;
+    break-after: page;
+  }
+
+  /* 脚注の設定 */
+  span {
+    &.footnote {
+      /* 脚注を表示 */
+      float: footnote;
+
+      /* 脚注のカウントを増やす */
+      counter-increment: footnote;
+
+      /* footnote-callは脚注を呼び出している箇所 */
+      /* footnote-markerは脚注の先頭に挿入される */
+      &::footnote-call,
+      &::footnote-marker {
+        content: '[' counter(footnote) '] ';
+      }
     }
+  }
 
-    p {
-        /* pタグ内で改ページされないようにする。 */
-        /* break-inside: avoid-page; */
+  /* 目次 */
+  nav.toc a::after {
+    content: target-counter(attr(href), page);
+    float: right;
+  }
 
-        /* 以下のようにしても同じ */
-        /* page-break-inside: avoid; */
-
-        /* 改ページ前に３行未満が残らないように分割 */
-        orphans: 3;
-
-        /* 改ページ後に３行未満が残らないように分割 */
-        widows: 3;
-
-        /* 改ページが途中で入ったときにそこの境界線にもスタイルを適用 */
-        box-decoration-break: clone;
-
-        /* 段落の始まりでインデント */
-        text-indent: 1rem;
-    }
-
-    figcaption {
-        // 前後の文章に応じて図表の位置を調節する
-        // float-reference: page;
-        // float: bottom;
-
-        /* 図表カウンタを増やす */
-        counter-increment: fig;
-
-        /* 図表番号を挿入 */
-        &::before {
-            content: '図' counter(fig) '. ';
-        }
-
-        &:first-child {
-            padding-bottom: 1rem;
-        }
-
-        &:last-child {
-            padding-top: 1rem;
-        }
-    }
-
-    figure {
-        // 前後の文章に応じて図表の位置を調節する
-        // float-reference: page;
-        // float: snap-block;
-        margin: 0;
-        padding: 1rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    /* タイトル */
-    .title {
-        font-size: 5rem;
-        color: $MAIN_COLOR;
-    }
-
-    /* １ページ目 */
-    .first-page {
-        text-align: center;
-        break-after: page;
-    }
-
-    /* 脚注の設定 */
-    span {
-        &.footnote {
-            /* 脚注を表示 */
-            float: footnote;
-
-            /* 脚注のカウントを増やす */
-            counter-increment: footnote;
-
-            /* footnote-callは脚注を呼び出している箇所 */
-            /* footnote-markerは脚注の先頭に挿入される */
-            &::footnote-call,
-            &::footnote-marker {
-                content: '[' counter(footnote) '] ';
-            }
-        }
-    }
-
-    /* 目次 */
-    nav.toc a::after {
-        content: target-counter(attr(href), page);
-        float: right;
-    }
+  // 解像度の設定
+  // img {
+    //     image-resolution: 300dpi;
+  // }
 
 }
 
