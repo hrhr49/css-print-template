@@ -2,6 +2,7 @@ const gulp = require('gulp');
 const sass = require('gulp-sass');
 const exec = require('child_process').exec;
 const hljs = require('highlightjs');
+const mdc = require('markdown-it-container');
 const md = require('markdown-it')({
   highlight: function (str, lang) {
     if (lang && hljs.getLanguage(lang)) {
@@ -18,6 +19,12 @@ const md = require('markdown-it')({
   linkify: true,
   typographer: true,
 })
+.use(mdc, 'title-page')
+.use(mdc, 'note')
+.use(mdc, 'info')
+.use(mdc, 'tip')
+.use(mdc, 'warning')
+.use(mdc, 'danger')
 .use(require('markdown-it-anchor'), {
   // h4タグまで目次に入れる
   includeLevel: 4,
@@ -53,6 +60,8 @@ let md2html = (callback) => {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style-screen.css">
+    <link rel="stylesheet" href="css/style-print.css">
     <link rel="stylesheet" href="css/monokai-sublime.css">
   </head>
   <body>

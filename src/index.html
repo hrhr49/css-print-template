@@ -7,16 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style-screen.css">
+    <link rel="stylesheet" href="css/style-print.css">
     <link rel="stylesheet" href="css/monokai-sublime.css">
   </head>
   <body>
-    <!-- タイトルページ -->
-<!-- bodyの最初にタイトルのh1タグを置く -->
+    <div class="title-page">
+<!-- タイトルページ -->
 <h1 id="%E3%82%BF%E3%82%A4%E3%83%88%E3%83%AB">タイトル</h1>
-<!-- bodyの2番目に著者などの情報をpタグで置く -->
 <p>所属：XXX YYY <br>
 著者名：山田　太郎</p>
-<div class="page-break"></div>
+</div>
 <!-- 目次 -->
 <p><div class="table-of-contents"><ul><li><a href="#%E3%82%BF%E3%82%A4%E3%83%88%E3%83%AB">タイトル</a></li><li><a href="#%E5%A4%A7%E9%A0%85%E7%9B%AE">大項目</a><ul><li><a href="#h2%E3%82%BF%E3%82%B0%E3%81%AE%E8%A6%8B%E5%87%BA%E3%81%97">h2タグの見出し</a></li><li><a href="#h2%E3%82%BF%E3%82%B0%E3%81%AE%E8%A6%8B%E5%87%BA%E3%81%972">h2タグの見出し2</a></li></ul></li><li><a href="#%E5%A4%A7%E9%A0%85%E7%9B%AE2">大項目2</a></li><li><a href="#%E5%A4%A7%E9%A0%85%E7%9B%AE3">大項目3</a><ul><li><a href="#aaaaa">aaaaa</a></li></ul></li></ul></div></p>
 <!-- 本文 -->
@@ -44,8 +45,8 @@
 <h2 id="h2%E3%82%BF%E3%82%B0%E3%81%AE%E8%A6%8B%E5%87%BA%E3%81%97">h2タグの見出し</h2>
 <h3 id="h3%E3%82%BF%E3%82%B0%E3%81%AE%E8%A6%8B%E5%87%BA%E3%81%97">h3タグの見出し</h3>
 <h2 id="h2%E3%82%BF%E3%82%B0%E3%81%AE%E8%A6%8B%E5%87%BA%E3%81%972">h2タグの見出し2</h2>
-<p>脚注をつけます。円周率は３ [3.141592]{.footnote} ネイピア数は
-[2.71828]{.footnote}</p>
+<p>脚注をつけます。円周率は３ <span class="footnote">3.141592</span> ネイピア数は
+<span class="footnote">2.71828</span></p>
 <p>これはテーブルです。</p>
 <table>
 <thead>
@@ -95,6 +96,22 @@
 </tr>
 </tbody>
 </table>
+<p>a</p>
+<div class="note">
+<p>これはnoteです</p>
+</div>
+<div class="info">
+<p>これはinfoです</p>
+</div>
+<div class="warning">
+<p>これはwarningです</p>
+</div>
+<div class="tip">
+<p>これはtipです</p>
+</div>
+<div class="danger">
+<p>これはdangerです</p>
+</div>
 <p>これは画像です。</p>
 <p><img src="./images/gazo.png" alt="ここに図の注釈が来ます"></p>
 <p>長い文章です。<br>
@@ -129,9 +146,6 @@
 長い文章です。<br>
 長い文章です。<br>
 長い文章です。</p>
-<p>::: {.section}
-これはセクション
-:::</p>
 <h1 id="%E5%A4%A7%E9%A0%85%E7%9B%AE2">大項目2</h1>
 <p>へろーわーるど aaa</p>
 <h1 id="%E5%A4%A7%E9%A0%85%E7%9B%AE3">大項目3</h1>

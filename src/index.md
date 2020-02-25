@@ -1,19 +1,15 @@
+::: title-page
 <!-- タイトルページ -->
-<!-- bodyの最初にタイトルのh1タグを置く -->
 # タイトル
 
-<!-- bodyの2番目に著者などの情報をpタグで置く -->
 所属：XXX YYY \
 著者名：山田　太郎
-
-<div class="page-break"></div>
+:::
 
 <!-- 目次 -->
 [[toc]]
 
-
 <!-- 本文 -->
-
 
 # 大項目
 
@@ -52,8 +48,8 @@ for file in os.listdir():
 
 ## h2タグの見出し2
 
-脚注をつけます。円周率は３ [3.141592]{.footnote} ネイピア数は
-[2.71828]{.footnote}
+脚注をつけます。円周率は３ <span class="footnote">3.141592</span> ネイピア数は
+<span class="footnote">2.71828</span>
 
 これはテーブルです。
 
@@ -65,7 +61,27 @@ for file in os.listdir():
 | 項目  | 項目  | 項目  | 項目  | 項目  |
 | 項目  | 項目  | 項目  | 項目  | 項目  |
 
+a
 
+::: note
+これはnoteです
+:::
+
+::: info
+これはinfoです
+:::
+
+::: warning
+これはwarningです
+:::
+
+::: tip
+これはtipです
+:::
+
+::: danger
+これはdangerです
+:::
 
 これは画像です。
 
@@ -104,9 +120,6 @@ for file in os.listdir():
 長い文章です。\
 長い文章です。
 
-::: {.section}
-これはセクション
-:::
 
 大項目2
 =======

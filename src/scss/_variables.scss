@@ -1,0 +1,17 @@
+/* アンダースコアから始まるファイル名のscssファイルはコンパイルされない */
+/* 見出しやヘッダ・フッタに使用する色 */
+$MAIN_COLOR: midnightblue;
+/* MAIN_COLORを背景としたときのフォントの色 */
+$MAIN_FONT_COLOR: white;
+
+/* NOTE, INFO, ... などの色 */
+$NOTE_COLOR: lightskyblue;
+$NOTE_FONT_COLOR: white;
+$WARNING_COLOR: orange;
+$WARNING_FONT_COLOR: white;
+$INFO_COLOR: royalblue;
+$INFO_FONT_COLOR: white;
+$DANGER_COLOR: crimson;
+$DANGER_FONT_COLOR: white;
+$TIP_COLOR: seagreen;
+$TIP_FONT_COLOR: white;

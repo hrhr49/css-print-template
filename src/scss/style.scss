@@ -1,8 +1,4 @@
-/* 見出しやヘッダ・フッタに使用する色 */
-$MAIN_COLOR: midnightblue;
-/* MAIN_COLORを背景としたときのフォントの色 */
-$MAIN_FONT_COLOR: white;
-
+@import "variables"; // ファイル名先頭の_(アンダースコア)はなしでインポートできる
 table, th, td {
   padding: 3px 8px;
   border: 1px solid $MAIN_COLOR;
@@ -17,10 +13,6 @@ th {
 p {
   // border: 2px solid $MAIN_COLOR;
 
-  /* タイトルページでは中央揃えにする */
-  &:first-child {
-    text-align: center;
-  }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -31,278 +23,61 @@ pre {
   border: 1px solid gray;
 }
 
-/* ここに画面に表示されるときの設定を書く */
-@media screen {
+.note {
+  &::before {
+    content: 'NOTE';
+    color: $NOTE_FONT_COLOR;
+    background-color: $NOTE_COLOR;
+  }
+  border-color: $NOTE_COLOR;
 }
 
-/* ここに印刷時の設定を書く */
-@media print{
-  @page {
-    /* 印刷サイズA4 */
-    size: A4;
-    /* margin: 20mm; */
-    margin: 1cm;
-
-    /* ページ下中央の余白部分 */
-    @bottom-center {
-      /* 表示するテキスト */
-      content: '@Copyright AAA';
-      color: $MAIN_FONT_COLOR;
-      background-color: $MAIN_COLOR;
-      font-size: 5mm;
-      margin-bottom: -3mm;
-      /* 隙間が開くので左右にも広げる */
-      margin-left: -1q;
-      margin-right: -1q;
-    }
-
-    /* ページ右下の余白部分 */
-    @bottom-right-corner {
-      /* ページ番号を表示 */
-      content: counter(page) ' / ' counter(pages);
-      color: $MAIN_FONT_COLOR;
-      font-size: 5mm;
-      background-color: $MAIN_COLOR;
-      margin-bottom: -3mm;
-      margin-right: -3mm;
-    }
-
-    /* ページ左下の余白部分 */
-    @bottom-left-corner {
-      content: '';
-      background-color: $MAIN_COLOR;
-      margin-bottom: -3mm;
-      margin-left: -3mm;
-    }
-
-    /* cropで四隅に、crossで四辺にトンボを表示 */
-    // marks: crop cross;
-
-
-    /* 「塗り足し」設定。bleedでページ範囲外の領域（裁ち落とし）の大きさ設定 */
-    /* ページマージンボックスを塗り足し部分に含めるために                    */
-    /* ページマージンボックスにマイナスマージンを指定する必要あり            */
-    bleed: 3mm;
+.info {
+  &::before {
+    content: 'INFO';
+    color: $INFO_FONT_COLOR;
+    background-color: $INFO_COLOR;
   }
-
-  /* 見開きの左ページにのみ適用 */
-  // @page :left {
-    //     margin-left: 30mm;
-  // }
-
-  /* 見開きの右ページにのみ適用 */
-  // @page :right {
-    //     margin-right: 30mm;
-  // }
-
-  /* 最初のページにのみ適用 */
-  @page :first {
-    /* タイトルページなので上にパディングを多めに取る */
-    padding-top: 25%;
-
-    /* ヘッダ・フッタはなし */
-    @bottom-center {
-      content:none;
-    }
-
-    @bottom-right-corner {
-      content: none;
-    }
-
-    @bottom-left-corner {
-      content: none;
-    }
-  }
-
-  body {
-    /* 明示されていない限り単語の途中は分断しない */
-    word-break: keep-all;
-
-    /* 々、・、！、ー、〜などの前で改行しない */
-    line-break: strict;
-
-    /* 文章が領域からはみ出す際は例外的に改行を許可 */
-    overflow-wrap: break-word;
-
-    /* 英字の単語の途中で分割できるか */
-    hyphens: auto;
-
-    /* 章、節番号のリセット */
-    counter-reset: h1 h2 h3;
-
-    /* bodyの最初にタイトルのh1タグを置く */
-    h1:first-child {
-      /* 章番号をつけない */
-      &::before {
-        content: none;
-      }
-      /* カウンタを増やさない */
-      counter-increment: h1 0;
-      font-size: 4rem;
-      text-align: center;
-    }
-
-    /* bodyの二番目に著者名などの情報を段落で置く */
-    p:nth-child(2) {
-      text-align: center;
-    }
-  }
-
-  h1 {
-    counter-increment: h1;
-    counter-reset: h2 h3;
-
-    /* 点々の下線を加える */
-    border-bottom: dotted;
-    &::before {
-      /* 章番号を先頭につける */
-      content: counter(h1) ' ';
-    }
-
-  }
-
-  h2 {
-    counter-increment: h2;
-    counter-reset: h3;
-    &::before {
-      /* 節番号を先頭につける */
-      content: counter(h1) '.' counter(h2) ' ';
-    }
-  }
-
-  h3 {
-    counter-increment: h3;
-    &::before {
-      content: counter(h1) '.' counter(h2) '.' counter(h3) ' ';
-    }
-  }
-
-  section {
-    break-before: page;
-    break-after: page;
-
-    /* 以下のようにしても同じ */
-    /* page-break-before: always; */
-    /* page-break-after: always; */
-  }
-
-  p {
-    /* pタグ内で改ページされないようにする。 */
-    /* break-inside: avoid-page; */
-
-    /* 以下のようにしても同じ */
-    /* page-break-inside: avoid; */
-
-    /* 改ページ前に３行未満が残らないように分割 */
-    orphans: 3;
-
-    /* 改ページ後に３行未満が残らないように分割 */
-    widows: 3;
-
-    /* 改ページが途中で入ったときにそこの境界線にもスタイルを適用 */
-    box-decoration-break: clone;
-
-    /* 段落の始まりでインデント */
-    text-indent: 1rem;
-  }
-
-  figcaption {
-    // 前後の文章に応じて図表の位置を調節する
-    // float-reference: page;
-    // float: bottom;
-
-    /* 図表カウンタを増やす */
-    counter-increment: fig;
-
-    /* 図表番号を挿入 */
-    &::before {
-      content: '図' counter(fig) '. ';
-    }
-
-    &:first-child {
-      padding-bottom: 1rem;
-    }
-
-    &:last-child {
-      padding-top: 1rem;
-    }
-  }
-
-  figure {
-    // 前後の文章に応じて図表の位置を調節する
-    // float-reference: page;
-    // float: snap-block;
-    margin: 0;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  /* タイトル */
-  .title {
-    font-size: 5rem;
-    font-weight: bold;
-    color: $MAIN_COLOR;
-  }
-
-  /* 脚注の設定 */
-  span {
-    &.footnote {
-      /* 脚注を表示 */
-      float: footnote;
-
-      /* 脚注のカウントを増やす */
-      counter-increment: footnote;
-
-      /* footnote-callは脚注を呼び出している箇所 */
-      /* footnote-markerは脚注の先頭に挿入される */
-      &::footnote-call,
-      &::footnote-marker {
-        content: '[' counter(footnote) '] ';
-      }
-    }
-  }
-
-  /* 目次 (参考： https://gist.github.com/MurakamiShinyu/4f0423fd3578a277c7d29f56a31912b7/) */
-  .table-of-contents {
-    &::before {
-      content: '目次';
-    }
-    break-before: page;
-    break-after: page;
-    li a {
-      display: inline-flex;
-      width: 100%;
-      align-items: baseline;
-      text-decoration: none;
-      color: $MAIN_COLOR;
-      &::before {
-        margin-left: 0.5em;
-        margin-right: 0.5em;
-        border-bottom: 1px dotted;
-        content: "";
-        order: 1;
-        flex: auto;
-      }
-      &::after {
-        content: target-counter(attr(href), page);
-        align-self: flex-end;
-        flex: none;
-        order: 2;
-      }
-    }
-  }
-
-  .page-break {
-    page-break-before: page;
-  }
-
-
-  // 解像度の設定
-  // img {
-    //     image-resolution: 300dpi;
-  // }
-
+  border-color: $INFO_COLOR;
 }
+
+.danger {
+  &::before {
+    content: 'DANGER';
+    color: $DANGER_FONT_COLOR;
+    background-color: $DANGER_COLOR;
+  }
+  border-color: $DANGER_COLOR;
+}
+
+.tip {
+  &::before {
+    content: 'TIP';
+    color: $TIP_FONT_COLOR;
+    background-color: $TIP_COLOR;
+  }
+  border-color: $TIP_COLOR;
+}
+
+.warning {
+  &::before {
+    content: 'WARNING';
+    color: $WARNING_FONT_COLOR;
+    background-color: $WARNING_COLOR;
+  }
+  border-color: $WARNING_COLOR;
+}
+
+.note, .info, .danger, .tip, .warning {
+  &::before {
+    position: relative;
+    top: 6px;
+    left: -2px;
+    padding: 8px;
+  }
+  margin: 20px;
+  border-width: 2px;
+  border-style: solid;
+}
+
 

@@ -1,0 +1,168 @@
+@charset "UTF-8";
+/* アンダースコアから始まるファイル名のscssファイルはコンパイルされない */
+/* 見出しやヘッダ・フッタに使用する色 */
+/* MAIN_COLORを背景としたときのフォントの色 */
+/* NOTE, INFO, ... などの色 */
+/* 印刷設定 */
+@media print {
+  @page {
+    /* 印刷サイズA4 */
+    size: A4;
+    /* margin: 20mm; */
+    margin: 1cm;
+    /* ページ下中央の余白部分 */
+    @bottom-center {
+      /* 表示するテキスト */
+      content: '@Copyright AAA';
+      color: white;
+      background-color: midnightblue;
+      font-size: 5mm;
+      margin-bottom: -3mm;
+      /* 隙間が開くので左右にも広げる */
+      margin-left: -1q;
+      margin-right: -1q; }
+    /* ページ右下の余白部分 */
+    @bottom-right-corner {
+      /* ページ番号を表示 */
+      content: counter(page) " / " counter(pages);
+      color: white;
+      font-size: 5mm;
+      background-color: midnightblue;
+      margin-bottom: -3mm;
+      margin-right: -3mm; }
+    /* ページ左下の余白部分 */
+    @bottom-left-corner {
+      content: '';
+      background-color: midnightblue;
+      margin-bottom: -3mm;
+      margin-left: -3mm; }
+    /* cropで四隅に、crossで四辺にトンボを表示 */
+    /* 「塗り足し」設定。bleedでページ範囲外の領域（裁ち落とし）の大きさ設定 */
+    /* ページマージンボックスを塗り足し部分に含めるために                    */
+    /* ページマージンボックスにマイナスマージンを指定する必要あり            */
+    bleed: 3mm; }
+  /* 見開きの左ページにのみ適用 */
+  /* 見開きの右ページにのみ適用 */
+  /* 最初のページにのみ適用 */
+  @page :first {
+    /* タイトルページなので上にパディングを多めに取る */
+    padding-top: 25%;
+    /* ヘッダ・フッタはなし */
+    @bottom-center {
+      content: none; }
+    @bottom-right-corner {
+      content: none; }
+    @bottom-left-corner {
+      content: none; } }
+  body {
+    /* 明示されていない限り単語の途中は分断しない */
+    word-break: keep-all;
+    /* 々、・、！、ー、〜などの前で改行しない */
+    line-break: strict;
+    /* 文章が領域からはみ出す際は例外的に改行を許可 */
+    overflow-wrap: break-word;
+    /* 英字の単語の途中で分割できるか */
+    hyphens: auto;
+    /* 章、節番号のリセット */
+    counter-reset: h1 h2 h3; }
+  h1 {
+    counter-increment: h1;
+    counter-reset: h2 h3;
+    /* 点々の下線を加える */
+    border-bottom: dotted; }
+    h1::before {
+      /* 章番号を先頭につける */
+      content: counter(h1) " "; }
+  h2 {
+    counter-increment: h2;
+    counter-reset: h3; }
+    h2::before {
+      /* 節番号を先頭につける */
+      content: counter(h1) "." counter(h2) " "; }
+  h3 {
+    counter-increment: h3; }
+    h3::before {
+      content: counter(h1) "." counter(h2) "." counter(h3) " "; }
+  section {
+    break-before: page;
+    break-after: page;
+    /* 以下のようにしても同じ */
+    /* page-break-before: always; */
+    /* page-break-after: always; */ }
+  p {
+    /* pタグ内で改ページされないようにする。 */
+    /* break-inside: avoid-page; */
+    /* 以下のようにしても同じ */
+    /* page-break-inside: avoid; */
+    /* 改ページ前に３行未満が残らないように分割 */
+    orphans: 3;
+    /* 改ページ後に３行未満が残らないように分割 */
+    widows: 3;
+    /* 改ページが途中で入ったときにそこの境界線にもスタイルを適用 */
+    box-decoration-break: clone;
+    /* 段落の始まりでインデント */
+    text-indent: 1rem; }
+  figcaption {
+    /* 図表カウンタを増やす */
+    counter-increment: fig;
+    /* 図表番号を挿入 */ }
+    figcaption::before {
+      content: "図" counter(fig) ". "; }
+    figcaption:first-child {
+      padding-bottom: 1rem; }
+    figcaption:last-child {
+      padding-top: 1rem; }
+  figure {
+    margin: 0;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+  /* 脚注の設定 */
+  span.footnote {
+    /* 脚注を表示 */
+    float: footnote;
+    /* 脚注のカウントを増やす */
+    counter-increment: footnote;
+    /* footnote-callは脚注を呼び出している箇所 */
+    /* footnote-markerは脚注の先頭に挿入される */ }
+    span.footnote::footnote-call, span.footnote::footnote-marker {
+      content: "[" counter(footnote) "] "; }
+  /* 目次 (参考： https://gist.github.com/MurakamiShinyu/4f0423fd3578a277c7d29f56a31912b7/) */
+  .table-of-contents {
+    break-after: page; }
+    .table-of-contents::before {
+      content: '目次'; }
+    .table-of-contents li a {
+      display: inline-flex;
+      width: 100%;
+      align-items: baseline;
+      text-decoration: none;
+      color: midnightblue; }
+      .table-of-contents li a::before {
+        margin-left: 0.5em;
+        margin-right: 0.5em;
+        border-bottom: 1px dotted;
+        content: "";
+        order: 1;
+        flex: auto; }
+      .table-of-contents li a::after {
+        content: target-counter(attr(href), page);
+        align-self: flex-end;
+        flex: none;
+        order: 2; }
+  .page-break {
+    page-break-before: page; }
+  /* 表紙 */
+  .title-page {
+    break-after: page; }
+    .title-page h1 {
+      /* 章番号をつけない */
+      /* カウンタを増やさない */
+      counter-increment: h1 0;
+      font-size: 4rem;
+      text-align: center; }
+      .title-page h1::before {
+        content: none; }
+    .title-page p {
+      text-align: center; } }
