@@ -9,9 +9,13 @@
     "gulp": "^4.0.2",
     "gulp-sass": "^4.0.2",
     "highlightjs": "^9.16.2",
+    "katex": "^0.11.1",
     "markdown-it": "^10.0.0",
     "markdown-it-anchor": "^5.2.5",
     "markdown-it-container": "^2.0.0",
-    "markdown-it-table-of-contents": "^0.4.4"
+    "markdown-it-table-of-contents": "^0.4.4",
+    "markdown-it-texmath": "^0.6.0",
+    "mermaid": "^8.4.8",
+    "mermaid.cli": "^0.5.1"
   }
 }

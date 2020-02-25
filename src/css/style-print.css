@@ -83,12 +83,9 @@
     counter-increment: h3; }
     h3::before {
       content: counter(h1) "." counter(h2) "." counter(h3) " "; }
-  section {
-    break-before: page;
-    break-after: page;
-    /* 以下のようにしても同じ */
-    /* page-break-before: always; */
-    /* page-break-after: always; */ }
+  /* 以下のようにしても同じ */
+  /* page-break-before: always; */
+  /* page-break-after: always; */
   p {
     /* pタグ内で改ページされないようにする。 */
     /* break-inside: avoid-page; */

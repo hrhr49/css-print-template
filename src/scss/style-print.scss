@@ -126,14 +126,14 @@
     }
   }
 
-  section {
-    break-before: page;
-    break-after: page;
+  // section {
+    // break-before: page;
+    // break-after: page;
 
     /* 以下のようにしても同じ */
     /* page-break-before: always; */
     /* page-break-after: always; */
-  }
+  // }
 
   p {
     /* pタグ内で改ページされないようにする。 */
@@ -262,6 +262,11 @@
   // img {
     //     image-resolution: 300dpi;
   // }
+
+
+  section {
+    // font-size: 3rem;
+  }
 
 }
 

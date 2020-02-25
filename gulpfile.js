@@ -3,6 +3,8 @@ const sass = require('gulp-sass');
 const exec = require('child_process').exec;
 const hljs = require('highlightjs');
 const mdc = require('markdown-it-container');
+const kt = require('katex');
+const tm = require('markdown-it-texmath').use(kt);
 const md = require('markdown-it')({
   highlight: function (str, lang) {
     if (lang && hljs.getLanguage(lang)) {
@@ -29,7 +31,12 @@ const md = require('markdown-it')({
   // h4タグまで目次に入れる
   includeLevel: 4,
 })
-.use(require('markdown-it-table-of-contents'));
+.use(require('markdown-it-table-of-contents'))
+.use(tm, {
+  delimiters: 'dollars',
+})
+.use(require('./markdown-it-myplugin'));
+
 
 const fs = require('fs');
 
@@ -40,7 +47,7 @@ let scss2css = () => {
 };
 
 let html2pdf = (callback) => {
-  const command = 'vivliostyle build src/index.html -o output/output.pdf'
+  const command = 'vivliostyle build --root . src/index.html -o output/output.pdf'
   exec(command, (err, stdout, stderr) => {
     console.log(stdout);
     console.log(stderr);
@@ -62,7 +69,9 @@ let md2html = (callback) => {
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/style-screen.css">
     <link rel="stylesheet" href="css/style-print.css">
-    <link rel="stylesheet" href="css/monokai-sublime.css">
+    <link rel="stylesheet" href="../node_modules/highlightjs/styles/monokai-sublime.css">
+    <link rel="stylesheet" href="../node_modules/katex/dist/katex.min.css">
+    <link rel="stylesheet" href="../node_modules/markdown-it-texmath/css/texmath.css">
   </head>
   <body>
     ${result}

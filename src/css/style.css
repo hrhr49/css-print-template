@@ -62,3 +62,12 @@ pre {
     top: 6px;
     left: -2px;
     padding: 8px; }
+
+/* .katexのスタイルを変えても反映されない？eqとeqnのスタイルを変えたらいけた */
+eq {
+  /* インライン数式 */
+  font-size: 1.3rem; }
+
+eqn {
+  /* ブロック数式 */
+  font-size: 1.5rem; }
