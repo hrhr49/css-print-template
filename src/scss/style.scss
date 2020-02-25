@@ -4,16 +4,31 @@ $MAIN_COLOR: midnightblue;
 $MAIN_FONT_COLOR: white;
 
 table, th, td {
+  padding: 3px 8px;
   border: 1px solid $MAIN_COLOR;
   border-collapse: collapse;
 }
 
+th {
+  background-color: $MAIN_COLOR;
+  color: $MAIN_FONT_COLOR;
+}
+
 p {
-  border: 2px solid $MAIN_COLOR;
+  // border: 2px solid $MAIN_COLOR;
+
+  /* タイトルページでは中央揃えにする */
+  &:first-child {
+    text-align: center;
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {
   color: $MAIN_COLOR;
+}
+
+pre {
+  border: 1px solid gray;
 }
 
 /* ここに画面に表示されるときの設定を書く */
@@ -114,6 +129,23 @@ h1, h2, h3, h4, h5, h6 {
 
     /* 章、節番号のリセット */
     counter-reset: h1 h2 h3;
+
+    /* bodyの最初にタイトルのh1タグを置く */
+    h1:first-child {
+      /* 章番号をつけない */
+      &::before {
+        content: none;
+      }
+      /* カウンタを増やさない */
+      counter-increment: h1 0;
+      font-size: 4rem;
+      text-align: center;
+    }
+
+    /* bodyの二番目に著者名などの情報を段落で置く */
+    p:nth-child(2) {
+      text-align: center;
+    }
   }
 
   h1 {
@@ -126,6 +158,7 @@ h1, h2, h3, h4, h5, h6 {
       /* 章番号を先頭につける */
       content: counter(h1) ' ';
     }
+
   }
 
   h2 {
@@ -213,21 +246,6 @@ h1, h2, h3, h4, h5, h6 {
     color: $MAIN_COLOR;
   }
 
-  /* 表紙 */
-  header {
-    h1 {
-      /* 章番号をつけない */
-      &::before {
-        content: none;
-      }
-      /* カウンタを増やさない */
-      counter-increment: h1 0;
-      font-size: 4rem;
-    }
-    text-align: center;
-    break-after: page;
-  }
-
   /* 脚注の設定 */
   span {
     &.footnote {
@@ -247,8 +265,12 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   /* 目次 (参考： https://gist.github.com/MurakamiShinyu/4f0423fd3578a277c7d29f56a31912b7/) */
-  nav.toc {
+  .table-of-contents {
+    &::before {
+      content: '目次';
+    }
     break-before: page;
+    break-after: page;
     li a {
       display: inline-flex;
       width: 100%;
@@ -271,6 +293,11 @@ h1, h2, h3, h4, h5, h6 {
       }
     }
   }
+
+  .page-break {
+    page-break-before: page;
+  }
+
 
   // 解像度の設定
   // img {

@@ -7,6 +7,10 @@
   "devDependencies": {
     "@vivliostyle/cli": "^2.0.0-pre.1",
     "gulp": "^4.0.2",
-    "gulp-sass": "^4.0.2"
+    "gulp-sass": "^4.0.2",
+    "highlightjs": "^9.16.2",
+    "markdown-it": "^10.0.0",
+    "markdown-it-anchor": "^5.2.5",
+    "markdown-it-table-of-contents": "^0.4.4"
   }
 }

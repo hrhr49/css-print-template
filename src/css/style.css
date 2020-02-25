@@ -2,14 +2,24 @@
 /* 見出しやヘッダ・フッタに使用する色 */
 /* MAIN_COLORを背景としたときのフォントの色 */
 table, th, td {
+  padding: 3px 8px;
   border: 1px solid midnightblue;
   border-collapse: collapse; }
 
+th {
+  background-color: midnightblue;
+  color: white; }
+
 p {
-  border: 2px solid midnightblue; }
+  /* タイトルページでは中央揃えにする */ }
+  p:first-child {
+    text-align: center; }
 
 h1, h2, h3, h4, h5, h6 {
   color: midnightblue; }
+
+pre {
+  border: 1px solid gray; }
 
 /* ここに画面に表示されるときの設定を書く */
 /* ここに印刷時の設定を書く */
@@ -73,7 +83,19 @@ h1, h2, h3, h4, h5, h6 {
     /* 英字の単語の途中で分割できるか */
     hyphens: auto;
     /* 章、節番号のリセット */
-    counter-reset: h1 h2 h3; }
+    counter-reset: h1 h2 h3;
+    /* bodyの最初にタイトルのh1タグを置く */
+    /* bodyの二番目に著者名などの情報を段落で置く */ }
+    body h1:first-child {
+      /* 章番号をつけない */
+      /* カウンタを増やさない */
+      counter-increment: h1 0;
+      font-size: 4rem;
+      text-align: center; }
+      body h1:first-child::before {
+        content: none; }
+    body p:nth-child(2) {
+      text-align: center; }
   h1 {
     counter-increment: h1;
     counter-reset: h2 h3;
@@ -132,17 +154,6 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 5rem;
     font-weight: bold;
     color: midnightblue; }
-  /* 表紙 */
-  header {
-    text-align: center;
-    break-after: page; }
-    header h1 {
-      /* 章番号をつけない */
-      /* カウンタを増やさない */
-      counter-increment: h1 0;
-      font-size: 4rem; }
-      header h1::before {
-        content: none; }
   /* 脚注の設定 */
   span.footnote {
     /* 脚注を表示 */
@@ -154,23 +165,28 @@ h1, h2, h3, h4, h5, h6 {
     span.footnote::footnote-call, span.footnote::footnote-marker {
       content: "[" counter(footnote) "] "; }
   /* 目次 (参考： https://gist.github.com/MurakamiShinyu/4f0423fd3578a277c7d29f56a31912b7/) */
-  nav.toc {
-    break-before: page; }
-    nav.toc li a {
+  .table-of-contents {
+    break-before: page;
+    break-after: page; }
+    .table-of-contents::before {
+      content: '目次'; }
+    .table-of-contents li a {
       display: inline-flex;
       width: 100%;
       align-items: baseline;
       text-decoration: none;
       color: midnightblue; }
-      nav.toc li a::before {
+      .table-of-contents li a::before {
         margin-left: 0.5em;
         margin-right: 0.5em;
         border-bottom: 1px dotted;
         content: "";
         order: 1;
         flex: auto; }
-      nav.toc li a::after {
+      .table-of-contents li a::after {
         content: target-counter(attr(href), page);
         align-self: flex-end;
         flex: none;
-        order: 2; } }
+        order: 2; }
+  .page-break {
+    page-break-before: page; } }

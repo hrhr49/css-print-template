@@ -1,6 +1,30 @@
 const gulp = require('gulp');
 const sass = require('gulp-sass');
 const exec = require('child_process').exec;
+const hljs = require('highlightjs');
+const md = require('markdown-it')({
+  highlight: function (str, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return '<pre class="hljs"><code>' +
+               hljs.highlight(lang, str, true).value +
+               '</code></pre>';
+      } catch (__) {}
+    }
+
+    return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>';
+  },
+  html: true,
+  linkify: true,
+  typographer: true,
+})
+.use(require('markdown-it-anchor'), {
+  // h4タグまで目次に入れる
+  includeLevel: 4,
+})
+.use(require('markdown-it-table-of-contents'));
+
+const fs = require('fs');
 
 let scss2css = () => {
   return gulp.src("src/scss/*.scss")
@@ -9,7 +33,7 @@ let scss2css = () => {
 };
 
 let html2pdf = (callback) => {
-  var command = 'vivliostyle build src/index.html -o output/output.pdf'
+  const command = 'vivliostyle build src/index.html -o output/output.pdf'
   exec(command, (err, stdout, stderr) => {
     console.log(stdout);
     console.log(stderr);
@@ -17,19 +41,35 @@ let html2pdf = (callback) => {
   });
 };
 
+let md2html = (callback) => {
+  const src = fs.readFileSync('src/index.md', 'utf-8');
+  const result = md.render(src);
+  const htmlStr = `
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/monokai-sublime.css">
+  </head>
+  <body>
+    ${result}
+  </body>
+</html>
+`;
 
-let build = gulp.series(scss2css, html2pdf);
-
-exports.build = build;
-exports.watch = () => {
-  gulp.watch(['src/scss/*.scss', 'src/*.html'], build);
+  fs.writeFileSync('src/index.html', htmlStr, 'utf-8');
+  callback();
 };
 
 
-// gulp.task('build', build_pdf);
-// gulp.task('watch', () => {
-//   gulp.watch('scss/*.scss', build_css);
-//   gulp.watch('src/**/*.html', build_pdf);
-//   gulp.watch('css/*.css', build_pdf);
-// });
+let build = gulp.series(gulp.parallel(scss2css, md2html), html2pdf);
+exports.build = build;
 
+exports.watch = () => {
+  gulp.watch('src/scss/*.scss', gulp.series(scss2css, html2pdf));
+  gulp.watch('src/*.md', gulp.series(md2html, html2pdf));
+};

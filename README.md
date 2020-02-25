@@ -41,11 +41,14 @@ yarn watch
 * [CSSではじめる同人誌制作 増訂版](https://booth.pm/ja/items/969754)
 * [Vivliostyle CSS組版ちょっと入門サンプル](https://gist.github.com/MurakamiShinyu/4f0423fd3578a277c7d29f56a31912b7/)
 
+## 注意点
+
+* h1~h6タグで同じ名称の項目があると、目次内でのページ数がおかしくなる。
+これはid属性によって紐付けを行っているため。
+
 ## TODO
 
 * フォントの設定
 * 目次の自動生成
 * ファイルの分割
 * Markdown対応
-
-

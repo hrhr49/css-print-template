@@ -1,120 +1,141 @@
+
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="css/style.css">
-  <title></title>
-</head>
-<body>
-  <!-- タイトルページ -->
-  <header>
-    <h1>タイトル</h1>
-    所属：XXX YYY<br />
-    著者名：山田　太郎<br />
-  </header>
-
-  <!-- 目次 -->
-  <nav class="toc">
-    <ol>
-      <li><a href="#chapter-dog">犬について</a></li>
-      <li><a href="#chapter-cat">猫について</a></li>
-    </ol>
-  </nav>
-
-  <!-- 目次参照先 -->
-  <section id="chapter-dog">
-    <h1>
-      犬について
-    </h1>
-  </section>
-  <section id="chapter-cat">
-    <h1>
-      猫について
-    </h1>
-  </section>
-
-  <h1>大項目</h1>
-
-  ここに内容を書きます。
-
-  <p>ここは段落です。</p>
-  <p>ここも段落です。</p>
-
-  <h2>h2タグの見出し</h2>
-  <h3>h3タグの見出し</h3>
-  <h2>h2タグの見出し</h2>
-  
-  脚注をつけます。円周率は３
-  <span class="footnote">3.141592</span>
-  ネイピア数は
-  <span class="footnote">2.71828</span>
-  これはテーブルです。
-
-  <table>
-    <figcaption>テーブルの注釈</figcaption>
-    <tr>
-      <th>列名</th>
-      <th>列名</th>
-      <th>列名</th>
-    </tr>
-    <tr>
-      <td>内容</td>
-      <td>内容</td>
-      <td>内容</td>
-    </tr>
-    <tr>
-      <td>内容</td>
-      <td>内容</td>
-      <td>内容</td>
-    </tr>
-  </table>
-
-  これは画像です。
-
-  <figure>
-    <img src="./images/gazo.png" alt="ここに画像があります。">
-    <figcaption>ここに図の注釈が来ます</figcaption>
-  </figure>
-
-  <p>長い文章です。 <br />
-    長い文章です。  <br />
-    長い文章です。  <br />
-    長い文章です。  <br />
-    長い文章です。  <br />
-    長い文章です。  <br />
-    長い文章です。  <br />
-    長い文章です。  <br />
-    長い文章です。  <br />
-    長い文章です。  <br />
-    長い文章です。  <br />
-    長い文章です。  <br />
-    長い文章です。  <br />
-    長い文章です。  <br />
-    長い文章です。  <br />
-    長い文章です。  <br />
-    長い文章です。  <br />
-    長い文章です。  <br />
-    長い文章です。  <br />
-    長い文章です。  <br />
-    長い文章です。  <br />
-    長い文章です。  <br />
-    長い文章です。  <br />
-    長い文章です。  <br />
-    長い文章です。  <br />
-    長い文章です。  <br />
-    長い文章です。  <br />
-    長い文章です。  <br />
-    長い文章です。  <br />
-    長い文章です。  <br />
-    長い文章です。  <br />
-    長い文章です。</p>
-
-  <section>これはセクション</section>
-  <h1>大項目2</h1>
-  へろーわーるど aaa
-  <h1>大項目3</h1>
-
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/monokai-sublime.css">
+  </head>
+  <body>
+    <!-- タイトルページ -->
+<!-- bodyの最初にタイトルのh1タグを置く -->
+<h1 id="%E3%82%BF%E3%82%A4%E3%83%88%E3%83%AB">タイトル</h1>
+<!-- bodyの2番目に著者などの情報をpタグで置く -->
+<p>所属：XXX YYY <br>
+著者名：山田　太郎</p>
+<div class="page-break"></div>
+<!-- 目次 -->
+<p><div class="table-of-contents"><ul><li><a href="#%E3%82%BF%E3%82%A4%E3%83%88%E3%83%AB">タイトル</a></li><li><a href="#%E5%A4%A7%E9%A0%85%E7%9B%AE">大項目</a><ul><li><a href="#h2%E3%82%BF%E3%82%B0%E3%81%AE%E8%A6%8B%E5%87%BA%E3%81%97">h2タグの見出し</a></li><li><a href="#h2%E3%82%BF%E3%82%B0%E3%81%AE%E8%A6%8B%E5%87%BA%E3%81%972">h2タグの見出し2</a></li></ul></li><li><a href="#%E5%A4%A7%E9%A0%85%E7%9B%AE2">大項目2</a></li><li><a href="#%E5%A4%A7%E9%A0%85%E7%9B%AE3">大項目3</a><ul><li><a href="#aaaaa">aaaaa</a></li></ul></li></ul></div></p>
+<!-- 本文 -->
+<h1 id="%E5%A4%A7%E9%A0%85%E7%9B%AE">大項目</h1>
+<p>ここに内容を書きます。</p>
+<p>ここは段落です。</p>
+<p>ここも段落です。</p>
+<p>ここにソースコードを書いています</p>
+<pre class="hljs"><code><span class="hljs-keyword">import</span> os
+<span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> os.listdir():
+    print(file)
+</code></pre>
+<pre class="hljs"><code><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"ja"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"X-UA-Compatible"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"IE=edge"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width, initial-scale=1"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+</code></pre>
 </body>
+</html>
+<h2 id="h2%E3%82%BF%E3%82%B0%E3%81%AE%E8%A6%8B%E5%87%BA%E3%81%97">h2タグの見出し</h2>
+<h3 id="h3%E3%82%BF%E3%82%B0%E3%81%AE%E8%A6%8B%E5%87%BA%E3%81%97">h3タグの見出し</h3>
+<h2 id="h2%E3%82%BF%E3%82%B0%E3%81%AE%E8%A6%8B%E5%87%BA%E3%81%972">h2タグの見出し2</h2>
+<p>脚注をつけます。円周率は３ [3.141592]{.footnote} ネイピア数は
+[2.71828]{.footnote}</p>
+<p>これはテーブルです。</p>
+<table>
+<thead>
+<tr>
+<th>列名1</th>
+<th>列名2</th>
+<th>列名3</th>
+<th>列名4</th>
+<th>列名5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>項目</td>
+<td>項目</td>
+<td>項目</td>
+<td>項目</td>
+<td>項目</td>
+</tr>
+<tr>
+<td>項目</td>
+<td>項目</td>
+<td>項目</td>
+<td>項目</td>
+<td>項目</td>
+</tr>
+<tr>
+<td>項目</td>
+<td>項目</td>
+<td>項目</td>
+<td>項目</td>
+<td>項目</td>
+</tr>
+<tr>
+<td>項目</td>
+<td>項目</td>
+<td>項目</td>
+<td>項目</td>
+<td>項目</td>
+</tr>
+<tr>
+<td>項目</td>
+<td>項目</td>
+<td>項目</td>
+<td>項目</td>
+<td>項目</td>
+</tr>
+</tbody>
+</table>
+<p>これは画像です。</p>
+<p><img src="./images/gazo.png" alt="ここに図の注釈が来ます"></p>
+<p>長い文章です。<br>
+長い文章です。<br>
+長い文章です。<br>
+長い文章です。<br>
+長い文章です。<br>
+長い文章です。<br>
+長い文章です。<br>
+長い文章です。<br>
+長い文章です。<br>
+長い文章です。<br>
+長い文章です。<br>
+長い文章です。<br>
+長い文章です。<br>
+長い文章です。<br>
+長い文章です。<br>
+長い文章です。<br>
+長い文章です。<br>
+長い文章です。<br>
+長い文章です。<br>
+長い文章です。<br>
+長い文章です。<br>
+長い文章です。<br>
+長い文章です。<br>
+長い文章です。<br>
+長い文章です。<br>
+長い文章です。<br>
+長い文章です。<br>
+長い文章です。<br>
+長い文章です。<br>
+長い文章です。<br>
+長い文章です。<br>
+長い文章です。</p>
+<p>::: {.section}
+これはセクション
+:::</p>
+<h1 id="%E5%A4%A7%E9%A0%85%E7%9B%AE2">大項目2</h1>
+<p>へろーわーるど aaa</p>
+<h1 id="%E5%A4%A7%E9%A0%85%E7%9B%AE3">大項目3</h1>
+<h2 id="aaaaa">aaaaa</h2>
+
+  </body>
 </html>
