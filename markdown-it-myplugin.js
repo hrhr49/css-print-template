@@ -38,9 +38,19 @@ let myPlugin = (md, options) => {
         break;
       case 'ditaa':
         // 全角文字の直後にスペースをつけて幅を揃える
-        code = code.replace(/([^\x01-\x7E])/g, '$1 ');
+        code = code.replace(/([^\x01-\x7E]+)/g, (match) => {
+          let padded = match;
+          for ( let i = 0; i < match.length; i++ )
+          {
+            padded += '\u200B'; // zero width space
+            // padded += ' ';
+          }
+          return padded;
+        });
         command = 'ditaa --svg --no-separation --no-shadows -';
         ext = 'svg'
+        // command = 'ditaa --no-separation --no-shadows -';
+        // ext = 'png'
 
         break;
       case 'plantuml':
@@ -66,6 +76,7 @@ let myPlugin = (md, options) => {
           if (!fs.existsSync(cacheName)) {
             console.log(`${cacheName} is not exists. Creating it ...`);
             const output = execSync(command, {input: code});
+            console.log(typeof(output));
             fs.writeFileSync(cacheName, output, 'utf-8');
           }
           else {
