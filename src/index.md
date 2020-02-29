@@ -75,7 +75,11 @@ a_i
 +---+
 ```
 
+<<<<<<< HEAD
 ```dot {"width": 100}
+=======
+```dot {"width": 200}
+>>>>>>> b782ed9822d1575e5ac87105e83844bb0bc2cea1
 digraph {
     a -> b;
 }
