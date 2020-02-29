@@ -4,7 +4,14 @@
 @media print{
   @page {
     /* 印刷サイズA4 */
-    size: A4;
+    // size: A4;
+
+    /* PowerPoint 2013以降のサイズ アスペクト比 16:9 */
+    // size: 33.867cm 19.05cm;
+
+    /* PowerPoint 2013以前のサイズ アスペクト比 4:3 */
+    size: 25.4cm 19.05cm;
+
     /* margin: 20mm; */
     margin: 1cm;
 

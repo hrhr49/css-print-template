@@ -19,7 +19,8 @@ let myPlugin = (md, options) => {
     const token = tokens[idx];
     const info = token.info ? md.utils.unescapeAll(token.info).trim() : '';
     let langName = '';
-    const useCache = true;
+
+    const useCache = options.useCache !== undefined ? options.useCache : true;
 
     if (info) {
       langName = info.split(/\s+/g)[0];
@@ -32,22 +33,20 @@ let myPlugin = (md, options) => {
     // コードブロックの言語がdotならimgタグを作成して返す
     switch (langName) {
       case 'dot':
-        command = 'dot -Tpng';
-        ext = 'png'
+        command = 'dot -Tsvg';
+        ext = 'svg'
         break;
       case 'ditaa':
         // 全角文字の直後にスペースをつけて幅を揃える
         code = code.replace(/([^\x01-\x7E])/g, '$1 ');
-        command = 'ditaa -';
-        ext = 'png'
+        command = 'ditaa --svg --no-separation --no-shadows -';
+        ext = 'svg'
+
         break;
       case 'plantuml':
-        command = 'plantuml -tpng -pipe';
-        ext = 'png'
+        command = 'plantuml -tsvg -pipe';
+        ext = 'svg'
         break;
-      // case 'mermaid':
-      //   command = 'npx mmdc -i tmp/input.mmd  -o tmp/output.png';
-      //   break;
       default:
         break;
     }
