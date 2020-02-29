@@ -1,6 +1,7 @@
 const gulp = require('gulp');
 const sass = require('gulp-sass');
 const exec = require('child_process').exec;
+const rmdir = require('rmdir');
 const hljs = require('highlightjs');
 const mdc = require('markdown-it-container');
 const kt = require('katex');
@@ -10,8 +11,8 @@ const md = require('markdown-it')({
     if (lang && hljs.getLanguage(lang)) {
       try {
         return '<pre class="hljs"><code>' +
-               hljs.highlight(lang, str, true).value +
-               '</code></pre>';
+          hljs.highlight(lang, str, true).value +
+          '</code></pre>';
       } catch (__) {}
     }
 
@@ -21,17 +22,17 @@ const md = require('markdown-it')({
   linkify: true,
   typographer: true,
 })
-.use(mdc, 'title-page')
-.use(require('markdown-it-admonition'))
-.use(require('markdown-it-anchor'), {
-  // h4タグまで目次に入れる
-  includeLevel: 4,
-})
-.use(require('markdown-it-table-of-contents'))
-.use(tm, {
-  delimiters: 'dollars',
-})
-.use(require('./markdown-it-myplugin'));
+  .use(mdc, 'title-page')
+  .use(require('markdown-it-admonition'))
+  .use(require('markdown-it-anchor'), {
+    // h4タグまで目次に入れる
+    includeLevel: 4,
+  })
+  .use(require('markdown-it-table-of-contents'))
+  .use(tm, {
+    delimiters: 'dollars',
+  })
+  .use(require('./markdown-it-myplugin'));
 
 
 const fs = require('fs');
@@ -65,12 +66,18 @@ let build = gulp.series(gulp.parallel(scss2css, md2html), html2pdf);
 exports.build = build;
 
 let clean = (callback) => {
-  console.log('Deleting cache directory...');
-  const command = 'rm -rf cache/'
-  exec(command, (err, stdout, stderr) => {
-    console.log(stdout);
-    console.log(stderr);
-    callback(err);
+  console.log('Removing cache directory...');
+  rmdir('cache/', (err, dirs, files) => {
+    if (!err) {
+      console.log('removed directories')
+      console.log(dirs);
+      console.log('removed files')
+      console.log(files);
+      console.log('all files are removed');
+      callback();
+    } else {
+      callback(err);
+    }
   });
 };
 
