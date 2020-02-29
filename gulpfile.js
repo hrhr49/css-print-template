@@ -64,6 +64,18 @@ let md2html = (callback) => {
 let build = gulp.series(gulp.parallel(scss2css, md2html), html2pdf);
 exports.build = build;
 
+let clean = (callback) => {
+  console.log('Deleting cache directory...');
+  const command = 'rm -rf cache/'
+  exec(command, (err, stdout, stderr) => {
+    console.log(stdout);
+    console.log(stderr);
+    callback(err);
+  });
+};
+
+exports.clean = clean;
+
 exports.watch = () => {
   gulp.watch('src/scss/*.scss', gulp.series(scss2css, html2pdf));
   gulp.watch('src/*.md', gulp.series(md2html, html2pdf));
