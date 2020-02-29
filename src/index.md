@@ -55,6 +55,7 @@ digraph {
 ```plantuml
 a -> b
 b -> c
+aa
 ```
 
 
