@@ -3,6 +3,13 @@
 /* 見出しやヘッダ・フッタに使用する色 */
 /* MAIN_COLORを背景としたときのフォントの色 */
 /* NOTE, INFO, ... などの色 */
+@font-face {
+  src: url(../../fonts/Noto_Sans_JP/NotoSansJP-Regular.otf);
+  font-family: 'Noto Sans JP'; }
+
+body {
+  font-family: 'Noto Sans JP'; }
+
 table, th, td {
   padding: 3px 8px;
   border: 1px solid midnightblue;
@@ -25,7 +32,7 @@ pre {
   margin-top: 0px;
   margin-left: 0px;
   margin-right: -4px;
-  font-size: 2rem; }
+  font-size: 1.4rem; }
   .note .admonition-title {
     color: white;
     background-color: lightskyblue; }

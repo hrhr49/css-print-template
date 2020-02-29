@@ -1,5 +1,14 @@
 @import "variables"; // ファイル名先頭の_(アンダースコア)はなしでインポートできる
 
+@font-face {
+  src: url(../../fonts/Noto_Sans_JP/NotoSansJP-Regular.otf);
+  font-family: 'Noto Sans JP';
+}
+
+body {
+  font-family: 'Noto Sans JP';
+}
+
 table, th, td {
   padding: 3px 8px;
   border: 1px solid $MAIN_COLOR;
@@ -31,7 +40,7 @@ pre {
   margin-top: 0px;
   margin-left: 0px;
   margin-right: -4px;
-  font-size: 2rem;
+  font-size: 1.4rem;
 
   @each $type, $prop in $admonition {
     .#{$type} & {
@@ -71,4 +80,3 @@ eqn {
   /* ブロック数式 */
   font-size: 1.5rem;
 }
-
