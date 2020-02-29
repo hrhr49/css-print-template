@@ -96,25 +96,25 @@ for file in os.listdir():
 
 a
 
-::: note
+!!! note NOTE
 これはnoteです
-:::
+!!!
 
-::: info
+!!! info
 これはinfoです
-:::
+!!!
 
-::: warning
+!!! warning
 これはwarningです
-:::
+!!!
 
-::: tip
+!!! tip
 これはtipです
-:::
+!!!
 
-::: danger
+!!! danger
 これはdangerです
-:::
+!!!
 
 これは画像です。
 

@@ -22,11 +22,7 @@ const md = require('markdown-it')({
   typographer: true,
 })
 .use(mdc, 'title-page')
-.use(mdc, 'note')
-.use(mdc, 'info')
-.use(mdc, 'tip')
-.use(mdc, 'warning')
-.use(mdc, 'danger')
+.use(require('markdown-it-admonition'))
 .use(require('markdown-it-anchor'), {
   // h4タグまで目次に入れる
   includeLevel: 4,
@@ -58,26 +54,7 @@ let html2pdf = (callback) => {
 let md2html = (callback) => {
   const src = fs.readFileSync('src/index.md', 'utf-8');
   const result = md.render(src);
-  const htmlStr = `
-<!DOCTYPE html>
-<html lang="ja">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/style-screen.css">
-    <link rel="stylesheet" href="css/style-print.css">
-    <link rel="stylesheet" href="../node_modules/highlightjs/styles/monokai-sublime.css">
-    <link rel="stylesheet" href="../node_modules/katex/dist/katex.min.css">
-    <link rel="stylesheet" href="../node_modules/markdown-it-texmath/css/texmath.css">
-  </head>
-  <body>
-    ${result}
-  </body>
-</html>
-`;
+  const htmlStr = fs.readFileSync('src/template.html', 'utf-8').replace('${result}', result);
 
   fs.writeFileSync('src/index.html', htmlStr, 'utf-8');
   callback();
@@ -90,4 +67,6 @@ exports.build = build;
 exports.watch = () => {
   gulp.watch('src/scss/*.scss', gulp.series(scss2css, html2pdf));
   gulp.watch('src/*.md', gulp.series(md2html, html2pdf));
+  gulp.watch('src/js/*.js', gulp.series(md2html, html2pdf));
+  gulp.watch('src/template.html', gulp.series(md2html, html2pdf));
 };

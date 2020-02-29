@@ -5,13 +5,25 @@ $MAIN_COLOR: midnightblue;
 $MAIN_FONT_COLOR: white;
 
 /* NOTE, INFO, ... などの色 */
-$NOTE_COLOR: lightskyblue;
-$NOTE_FONT_COLOR: white;
-$WARNING_COLOR: orange;
-$WARNING_FONT_COLOR: white;
-$INFO_COLOR: royalblue;
-$INFO_FONT_COLOR: white;
-$DANGER_COLOR: crimson;
-$DANGER_FONT_COLOR: white;
-$TIP_COLOR: seagreen;
-$TIP_FONT_COLOR: white;
+$admonition: (
+  note: (
+    color: white,
+    border-color: lightskyblue,
+  ),
+  info: (
+    color: white,
+    border-color: royalblue,
+  ),
+  warning: (
+    color: white,
+    border-color: orange,
+  ),
+  tip: (
+    color: white,
+    border-color: seagreen,
+  ),
+  danger: (
+    color: white,
+    border-color: crimson,
+  )
+);

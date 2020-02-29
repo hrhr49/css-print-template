@@ -24,49 +24,29 @@ pre {
   border: 1px solid gray;
 }
 
-.note {
-  &::before {
-    content: 'NOTE';
-    color: $NOTE_FONT_COLOR;
-    background-color: $NOTE_COLOR;
+.admonition-title {
+  position: relative;
+  left: -2px;
+  top: -2px;
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-right: -4px;
+  font-size: 2rem;
+
+  @each $type, $prop in $admonition {
+    .#{$type} & {
+      color: map-get($prop, color);
+      background-color: map-get($prop, border-color);
+    }
   }
-  border-color: $NOTE_COLOR;
 }
 
-.info {
-  &::before {
-    content: 'INFO';
-    color: $INFO_FONT_COLOR;
-    background-color: $INFO_COLOR;
+.admonition {
+  @each $type, $prop in $admonition {
+    &.#{$type} {
+      border-color: map-get($prop, border-color);
+    }
   }
-  border-color: $INFO_COLOR;
-}
-
-.danger {
-  &::before {
-    content: 'DANGER';
-    color: $DANGER_FONT_COLOR;
-    background-color: $DANGER_COLOR;
-  }
-  border-color: $DANGER_COLOR;
-}
-
-.tip {
-  &::before {
-    content: 'TIP';
-    color: $TIP_FONT_COLOR;
-    background-color: $TIP_COLOR;
-  }
-  border-color: $TIP_COLOR;
-}
-
-.warning {
-  &::before {
-    content: 'WARNING';
-    color: $WARNING_FONT_COLOR;
-    background-color: $WARNING_COLOR;
-  }
-  border-color: $WARNING_COLOR;
 }
 
 .note, .info, .danger, .tip, .warning {

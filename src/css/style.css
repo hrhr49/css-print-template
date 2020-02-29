@@ -18,40 +18,44 @@ h1, h2, h3, h4, h5, h6 {
 pre {
   border: 1px solid gray; }
 
-.note {
-  border-color: lightskyblue; }
-  .note::before {
-    content: 'NOTE';
+.admonition-title {
+  position: relative;
+  left: -2px;
+  top: -2px;
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-right: -4px;
+  font-size: 2rem; }
+  .note .admonition-title {
     color: white;
     background-color: lightskyblue; }
-
-.info {
-  border-color: royalblue; }
-  .info::before {
-    content: 'INFO';
+  .info .admonition-title {
     color: white;
     background-color: royalblue; }
-
-.danger {
-  border-color: crimson; }
-  .danger::before {
-    content: 'DANGER';
+  .warning .admonition-title {
+    color: white;
+    background-color: orange; }
+  .tip .admonition-title {
+    color: white;
+    background-color: seagreen; }
+  .danger .admonition-title {
     color: white;
     background-color: crimson; }
 
-.tip {
-  border-color: seagreen; }
-  .tip::before {
-    content: 'TIP';
-    color: white;
-    background-color: seagreen; }
+.admonition.note {
+  border-color: lightskyblue; }
 
-.warning {
+.admonition.info {
+  border-color: royalblue; }
+
+.admonition.warning {
   border-color: orange; }
-  .warning::before {
-    content: 'WARNING';
-    color: white;
-    background-color: orange; }
+
+.admonition.tip {
+  border-color: seagreen; }
+
+.admonition.danger {
+  border-color: crimson; }
 
 .note, .info, .danger, .tip, .warning {
   margin: 20px;
