@@ -7,7 +7,10 @@
 :::
 
 <!-- 目次 -->
+
+::: bookmark
 [[toc]]
+:::
 
 <!-- 本文 -->
 
@@ -75,11 +78,7 @@ a_i
 +---+
 ```
 
-<<<<<<< HEAD
-```dot {"width": 100}
-=======
 ```dot {"width": 200}
->>>>>>> b782ed9822d1575e5ac87105e83844bb0bc2cea1
 digraph {
     a -> b;
 }
@@ -109,7 +108,6 @@ for file in os.listdir():
 </head>
 <body>
 ```
-
 </body>
 </html>
 
@@ -119,8 +117,9 @@ for file in os.listdir():
 
 ## h2タグの見出し2
 
-脚注をつけます。円周率は３ <span class="footnote">3.141592</span> ネイピア数は
-<span class="footnote">2.71828</span>
+脚注をつけます。
+
+円周率は３ <span class="footnote">3.141592</span> ネイピア数は<span class="footnote">2.71828</span>
 
 これはテーブルです。
 
@@ -132,27 +131,26 @@ for file in os.listdir():
 | 項目  | 項目  | 項目  | 項目  | 項目  |
 | 項目  | 項目  | 項目  | 項目  | 項目  |
 
-a
 
-!!! note NOTE
+::: note
 これはnoteです
-!!!
+:::
 
-!!! info
+::: info
 これはinfoです
-!!!
+:::
 
-!!! warning
+::: warning
 これはwarningです
-!!!
+:::
 
-!!! tip
+::: tip
 これはtipです
-!!!
+:::
 
-!!! danger
+::: danger
 これはdangerです
-!!!
+:::
 
 これは画像です。
 
@@ -203,3 +201,4 @@ a
 
 ## aaaaa
 
+<i class="fas fa-pencil-alt"></i>

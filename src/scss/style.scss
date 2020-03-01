@@ -5,6 +5,17 @@
   font-family: 'Noto Sans JP';
 }
 
+// .admonition-title::before{
+//   content: '';
+//   display: inline-block;
+//   width: 24px;
+//   height: 24px;
+//   margin: 6px 10px;
+//   background-image: url(../../node_modules/@fortawesome/fontawesome-free/svgs/solid/pencil-alt.svg);
+//   background-size: contain;
+//   vertical-align: middle;
+// }
+
 body {
   font-family: 'Noto Sans JP';
 }
@@ -40,20 +51,22 @@ pre {
   margin-top: 0px;
   margin-left: 0px;
   margin-right: -4px;
+  padding: 0px 4px;
   font-size: 1.4rem;
-
-  @each $type, $prop in $admonition {
-    .#{$type} & {
-      color: map-get($prop, color);
-      background-color: map-get($prop, border-color);
-    }
-  }
 }
 
 .admonition {
   @each $type, $prop in $admonition {
     &.#{$type} {
+      border-radius: 6px;
       border-color: map-get($prop, border-color);
+      background-color: map-get($prop, background-color);
+      .admonition-title {
+        border-radius: 6px 6px 0px 0px;
+        border-color: map-get($prop, border-color);
+        background-color: map-get($prop, border-color);
+        color: map-get($prop, color);
+      }
     }
   }
 }

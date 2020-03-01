@@ -2,6 +2,7 @@
   "scripts": {
     "build": "gulp build",
     "watch": "gulp watch",
+    "preview": "vivliostyle preview --root . src/index.html",
     "clean": "gulp clean"
   },
   "dependencies": {},
@@ -14,7 +15,6 @@
     "highlightjs": "^9.16.2",
     "katex": "^0.11.1",
     "markdown-it": "^10.0.0",
-    "markdown-it-admonition": "^1.0.4",
     "markdown-it-anchor": "^5.2.5",
     "markdown-it-container": "^2.0.0",
     "markdown-it-table-of-contents": "^0.4.4",

@@ -23,12 +23,53 @@ const md = require('markdown-it')({
   typographer: true,
 })
   .use(mdc, 'title-page')
-  .use(require('markdown-it-admonition'))
+  .use(mdc, 'bookmark', {
+    render: function (tokens, idx) {
+      if (tokens[idx].nesting === 1) {
+        // opening tag
+        return '<nav role="doc-toc" epub:type="toc">\n';
+
+      } else {
+        // closing tag
+        return '</nav>\n';
+      }
+    }
+  })
+  .use(mdc, 'admonition', {
+    validate: function (params) {
+      return /^(note|info|warning|tip|danger)((\s+(.*))?)$/.test(params.trim());
+    },
+
+    render: function (tokens, idx) {
+
+      if (tokens[idx].nesting === 1) {
+        let m = tokens[idx].info.trim().match(/^(note|info|warning|tip|danger)((\s+(.*))?)$/);
+        const adType = md.utils.escapeHtml(m[1]);
+        const adTypeTitle = {
+          note: 'Note',
+          info: 'Info',
+          warning: 'Warning',
+          tip: 'Tip',
+          danger: 'Danger'
+        }[adType];
+        const adTitle = md.utils.escapeHtml(m[2]) || adTypeTitle;
+        // opening tag
+        return `<div class="admonition ${adType}"><p class="admonition-title">${adTitle}</p>`;
+
+      } else {
+        // closing tag
+        return '</div>';
+      }
+    }
+  })
+  // .use(require('markdown-it-admonition'))
   .use(require('markdown-it-anchor'), {
     // h4タグまで目次に入れる
     includeLevel: 4,
   })
-  .use(require('markdown-it-table-of-contents'))
+  .use(require('markdown-it-table-of-contents'), {
+    listType: 'ol',
+  })
   .use(tm, {
     delimiters: 'dollars',
   })
@@ -44,7 +85,7 @@ let scss2css = () => {
 };
 
 let html2pdf = (callback) => {
-  const command = 'vivliostyle build --root . src/index.html -o output/output.pdf'
+  const command = 'vivliostyle build --book --no-sandbox --root . src/index.html -o output/output.pdf'
   exec(command, (err, stdout, stderr) => {
     console.log(stdout);
     console.log(stderr);
