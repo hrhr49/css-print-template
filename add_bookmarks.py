@@ -2,7 +2,6 @@
 # 参考 
 # https://stackoverflow.com/questions/18855907/adding-bookmarks-using-pypdf2
 # https://stackoverflow.com/questions/50950825/pypdf2-why-am-i-getting-an-index-error-list-index-out-of-range
-
 from PyPDF2 import PdfFileWriter, PdfFileReader
 import json
 
