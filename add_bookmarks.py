@@ -2,6 +2,7 @@
 # 参考 
 # https://stackoverflow.com/questions/18855907/adding-bookmarks-using-pypdf2
 # https://stackoverflow.com/questions/50950825/pypdf2-why-am-i-getting-an-index-error-list-index-out-of-range
+
 from PyPDF2 import PdfFileWriter, PdfFileReader
 import json
 
@@ -19,8 +20,7 @@ if __name__ == '__main__':
     if reader.isEncrypted:
         reader.decrypt('')
 
-    for page in reader.pages:
-        writer.addPage(page)
+    writer.cloneDocumentFromReader(reader)
 
     parent = writer.addBookmark('Introduction', 0) # add parent bookmark
     writer.addBookmark('Hello, World', 0, parent) # add child bookmark
