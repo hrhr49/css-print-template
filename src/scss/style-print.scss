@@ -161,7 +161,13 @@
     box-decoration-break: clone;
 
     /* 段落の始まりでインデント */
-    text-indent: 1rem;
+    // admonition-titleなどでもインデントされないように保留
+    // text-indent: 1rem;
+  }
+
+  .admonition-title {
+    /* 段落の始まりでインデントしない */
+    // text-indent: none;
   }
 
   figcaption {

@@ -100,8 +100,9 @@
     widows: 3;
     /* 改ページが途中で入ったときにそこの境界線にもスタイルを適用 */
     box-decoration-break: clone;
-    /* 段落の始まりでインデント */
-    text-indent: 1rem; }
+    /* 段落の始まりでインデント */ }
+  .admonition-title {
+    /* 段落の始まりでインデントしない */ }
   figcaption {
     /* 図表カウンタを増やす */
     counter-increment: fig;
