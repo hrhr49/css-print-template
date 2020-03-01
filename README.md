@@ -1,5 +1,13 @@
 # CSS組版のテンプレ
 
+自分用のドキュメント作成環境を作成するためのリポジトリです。
+いい感じのPDFを作る環境を作るのが目標です。
+
+## 使用したもの
+
+* [markdown-it](https://github.com/markdown-it/markdown-it) : markdownからhtmlへの変換
+* [vivliostyle](https://github.com/vivliostyle/vivliostyle) : CSS組版によって出力PDFのレイアウトなど調整
+
 ## 必要なもの
 
 * Node.js
@@ -44,9 +52,6 @@ yarn watch
 ```
 
 
-## 使用したもの
-
-* [vivliostyle](https://vivliostyle.org/ja/)
 
 ## 参考
 
@@ -62,3 +67,4 @@ yarn watch
 
 * ファイルの分割
 * PDFでのブックマーク自動生成
+* ディレクトリ構成やスクリプトの整理
