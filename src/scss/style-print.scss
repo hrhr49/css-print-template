@@ -223,9 +223,9 @@
 
   /* 目次 (参考： https://gist.github.com/MurakamiShinyu/4f0423fd3578a277c7d29f56a31912b7/) */
   .table-of-contents {
-    &::before {
-      content: '目次';
-    }
+    // &::before {
+    //   content: '目次';
+    // }
     break-after: page;
     li a {
       display: inline-flex;

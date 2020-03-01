@@ -1,0 +1,26 @@
+[
+  {
+    "title": "ブクマ1",
+    "page": 0,
+    "children": [
+    ]
+  },
+  {
+    "title": "ブクマ2",
+    "page": 1,
+    "children": [
+      {
+        "title": "ブクマ2-1",
+        "page": 2,
+        "children": [
+        ]
+      },
+      {
+        "title": "ブクマ2-2",
+        "page": 3,
+        "children": [
+        ]
+      }
+    ]
+  }
+]
