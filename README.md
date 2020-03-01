@@ -9,15 +9,26 @@
 
 1. パッケージのインストール
 
+1-1. npmパッケージ
 ```
 npm install
 ```
-
 または
 
 ```
 yarn
 ```
+
+1-2. pipパッケージ
+
+```
+pip install pipenv # pipenvが入っていない場合
+```
+
+```
+pipenv install
+```
+
 
 2. ビルド
 
@@ -49,7 +60,5 @@ yarn watch
 
 ## TODO
 
-* フォントの設定
-* 目次の自動生成
 * ファイルの分割
-* Markdown対応
+* PDFでのブックマーク自動生成
