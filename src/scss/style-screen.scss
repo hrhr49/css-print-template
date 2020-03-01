@@ -2,4 +2,8 @@
 
 /* ブラウザ表示設定 */
 @media screen {
+  .admonition-title {
+    // ブラウザのときに横のパディングが小さい気がするので
+    // padding: 0px 1rem;
+  }
 }

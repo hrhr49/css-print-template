@@ -30,60 +30,58 @@ pre {
   left: -2px;
   top: -2px;
   margin-top: 0px;
-  margin-left: 0px;
+  margin-left: -1rem;
   margin-right: -4px;
-  padding: 0px 4px;
+  padding-left: 1rem;
   font-size: 1.4rem; }
 
-.admonition.note {
-  border-radius: 6px;
-  border-color: lightskyblue;
-  background-color: azure; }
-  .admonition.note .admonition-title {
-    border-radius: 6px 6px 0px 0px;
+.admonition {
+  padding-left: 1rem; }
+  .admonition.note {
+    border-radius: 6px;
     border-color: lightskyblue;
-    background-color: lightskyblue;
-    color: white; }
-
-.admonition.info {
-  border-radius: 6px;
-  border-color: royalblue;
-  background-color: lightcyan; }
-  .admonition.info .admonition-title {
-    border-radius: 6px 6px 0px 0px;
+    background-color: azure; }
+    .admonition.note .admonition-title {
+      border-radius: 6px 6px 0px 0px;
+      border-color: lightskyblue;
+      background-color: lightskyblue;
+      color: white; }
+  .admonition.info {
+    border-radius: 6px;
     border-color: royalblue;
-    background-color: royalblue;
-    color: white; }
-
-.admonition.warning {
-  border-radius: 6px;
-  border-color: orange;
-  background-color: lightyellow; }
-  .admonition.warning .admonition-title {
-    border-radius: 6px 6px 0px 0px;
+    background-color: lightcyan; }
+    .admonition.info .admonition-title {
+      border-radius: 6px 6px 0px 0px;
+      border-color: royalblue;
+      background-color: royalblue;
+      color: white; }
+  .admonition.warning {
+    border-radius: 6px;
     border-color: orange;
-    background-color: orange;
-    color: white; }
-
-.admonition.tip {
-  border-radius: 6px;
-  border-color: seagreen;
-  background-color: honeydew; }
-  .admonition.tip .admonition-title {
-    border-radius: 6px 6px 0px 0px;
+    background-color: lightyellow; }
+    .admonition.warning .admonition-title {
+      border-radius: 6px 6px 0px 0px;
+      border-color: orange;
+      background-color: orange;
+      color: white; }
+  .admonition.tip {
+    border-radius: 6px;
     border-color: seagreen;
-    background-color: seagreen;
-    color: white; }
-
-.admonition.danger {
-  border-radius: 6px;
-  border-color: crimson;
-  background-color: lavenderblush; }
-  .admonition.danger .admonition-title {
-    border-radius: 6px 6px 0px 0px;
+    background-color: honeydew; }
+    .admonition.tip .admonition-title {
+      border-radius: 6px 6px 0px 0px;
+      border-color: seagreen;
+      background-color: seagreen;
+      color: white; }
+  .admonition.danger {
+    border-radius: 6px;
     border-color: crimson;
-    background-color: crimson;
-    color: white; }
+    background-color: lavenderblush; }
+    .admonition.danger .admonition-title {
+      border-radius: 6px 6px 0px 0px;
+      border-color: crimson;
+      background-color: crimson;
+      color: white; }
 
 .note, .info, .danger, .tip, .warning {
   margin: 20px;

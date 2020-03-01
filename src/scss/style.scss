@@ -33,7 +33,6 @@ th {
 
 p {
   // border: 2px solid $MAIN_COLOR;
-
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -49,13 +48,14 @@ pre {
   left: -2px;
   top: -2px;
   margin-top: 0px;
-  margin-left: 0px;
+  margin-left: -1rem;
   margin-right: -4px;
-  padding: 0px 4px;
+  padding-left: 1rem;
   font-size: 1.4rem;
 }
 
 .admonition {
+  padding-left: 1rem;
   @each $type, $prop in $admonition {
     &.#{$type} {
       border-radius: 6px;

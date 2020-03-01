@@ -21,6 +21,7 @@
     "markdown-it-texmath": "^0.6.0",
     "mermaid": "^8.4.8",
     "mermaid.cli": "^0.5.1",
+    "reset-css": "^5.0.1",
     "rmdir": "^1.2.0"
   }
 }
