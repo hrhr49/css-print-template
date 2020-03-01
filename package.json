@@ -3,7 +3,8 @@
     "build": "gulp build",
     "watch": "gulp watch",
     "preview": "vivliostyle preview --root . src/index.html",
-    "clean": "gulp clean"
+    "clean": "gulp clean",
+    "bookmark": "pipenv run python add_bookmarks.py"
   },
   "dependencies": {},
   "devDependencies": {

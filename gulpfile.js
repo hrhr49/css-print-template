@@ -64,11 +64,11 @@ const md = require('markdown-it')({
   })
   // .use(require('markdown-it-admonition'))
   .use(require('markdown-it-anchor'), {
-    // h4タグまで目次に入れる
-    includeLevel: 4,
   })
   .use(require('markdown-it-table-of-contents'), {
-    listType: 'ol',
+    // h3タグまで目次に入れる
+    includeLevel: [1, 2, 3],
+    listType: 'ul',
   })
   .use(tm, {
     delimiters: 'dollars',
