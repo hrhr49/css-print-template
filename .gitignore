@@ -3,3 +3,4 @@ yarn-error.log
 .mypy_cache/
 cache/
 .venv/
+src/css/*.css
