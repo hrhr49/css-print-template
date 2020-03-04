@@ -102,7 +102,7 @@
     /* 章、節番号のリセット */
     counter-reset: h1 h2 h3;
 
-    text-spacing: none;
+    // text-spacing: none;
 
   }
 
@@ -165,10 +165,10 @@
     // text-indent: 1rem;
   }
 
-  .admonition-title {
+  // .admonition-title {
     /* 段落の始まりでインデントしない */
     // text-indent: none;
-  }
+  // }
 
   figcaption {
     // 前後の文章に応じて図表の位置を調節する
@@ -221,31 +221,50 @@
     }
   }
 
-  /* 目次 (参考： https://gist.github.com/MurakamiShinyu/4f0423fd3578a277c7d29f56a31912b7/) */
+  /* 目次  */
   .table-of-contents {
-    // &::before {
-    //   content: '目次';
-    // }
     break-after: page;
+    counter-reset: toc-h1 toc-h2 toc-h3;
+
+    /* 章や節の番号 */
+    & > ul > li {
+      counter-increment: toc-h1;
+      counter-reset: toc-h2 toc-h3;
+      list-style-type: none;
+      & > a::before {
+        content: counter(toc-h1) ' ';
+      }
+      & > ul > li {
+        counter-increment: toc-h2;
+        counter-reset: toc-h3;
+        list-style-type: none;
+        & > a::before {
+          content: counter(toc-h1) '.' counter(toc-h2) ' ';
+        }
+        & > ul > li {
+          counter-increment: toc-h3;
+          list-style-type: none;
+          & > a::before {
+            content: counter(toc-h1) '.' counter(toc-h2) '.' counter(toc-h3) ' ';
+          }
+        }
+      }
+    }
     li a {
-      display: inline-flex;
-      width: 100%;
+      display: block;
+      margin-top: 0.3em;
+      margin-bottom: 0.3em;
+      margin-left: 0.5em;
+      margin-right: 0.5em;
+      border-bottom: 1px dotted $MAIN_COLOR;
       align-items: baseline;
       text-decoration: none;
       color: $MAIN_COLOR;
-      &::before {
-        margin-left: 0.5em;
-        margin-right: 0.5em;
-        border-bottom: 1px dotted;
-        content: "";
-        order: 1;
-        flex: auto;
-      }
       &::after {
         content: target-counter(attr(href), page);
-        align-self: flex-end;
-        flex: none;
-        order: 2;
+        color: $MAIN_COLOR;
+        margin-left: 0px;
+        float: right;
       }
     }
   }
